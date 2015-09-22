@@ -1,0 +1,16 @@
+﻿{% extends "base.html" %}
+{% block title %}{% endblock %}
+{% block app %}class="active"{% endblock %}
+
+{% block main %}
+    <p id="QR_code"><strong>扫描二维码，下载app</strong></p>
+    <p>123123123</p><p>123123123</p><p>123123123</p><p>123123123</p><p>123123123</p><p>123123123</p><p>123123123</p>
+    <p>123123123</p>
+{% endblock %}
+{% block modal %}
+    {{ super() }}
+{% endblock %}
+{% block scripts %}
+    {{ super() }}
+    <script src="static/app/js/International/getApp.js"></script>
+{% endblock %}

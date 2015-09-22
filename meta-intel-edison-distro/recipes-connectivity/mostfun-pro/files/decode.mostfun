@@ -1,0 +1,3 @@
+#!/bin/bash
+dd if=${1} |openssl des3 -d -k 8d374d372c06ac5bb0174c3646d835f5|tar zxf -
+#dd if=${1} |openssl des3 -d -k mostfun|tar zxf -

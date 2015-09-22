@@ -1,0 +1,31 @@
+DESCRIPTION = "nginx [engine x] is an HTTP and reverse proxy server, a mail proxy server, and a generic TCP proxy server, originally written by Igor Sysoev."
+HOMEPAGE = "https://http://nginx.org/"
+SECTION = "devel/nginx"
+LICENSE = "CLOSED"
+
+PR = "r0"
+SRCNAME = "Flask-WTF"
+
+SRC_URI = "https://http://nginx.org/download/nginx-${PV}.tar.gz"
+
+SRC_URI[md5sum] = "c53a74e8ba481bf53405fd5efdf0339e"
+SRC_URI[sha256sum] = "bd99316c97ed1d1cb90b8f0c242c86420a891a6a2058f20717e424bf5b0bb80e"
+
+
+S = "${WORKDIR}"
+
+inherit allarch update-alternatives
+
+
+FILES_${PN}  += " \
+"
+
+
+do_compile() {
+    make
+    make install
+}
+
+do_install() {
+
+}

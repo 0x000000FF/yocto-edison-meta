@@ -1,0 +1,116 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>mostfun 3D view</title>
+        <meta charset="utf-8">
+        <meta name="viewport" content="width=device-width, user-scalable=no, minimum-scale=1.0, maximum-scale=1.0">
+
+    </head>
+    <body>
+        <div id="info"></div>
+        <script src="../static/3dv/three.min.js"></script>
+        <script src="../static/3dv/OrbitControls.js"></script>
+        <script src="../static/3dv/STLLoader.js"></script>
+
+        <script src="../static/3dv/Detector.js"></script>
+
+        <script>
+
+            if ( ! Detector.webgl ) Detector.addGetWebGLMessage();
+
+            var container;
+            var camera, controls,cameraTarget, scene, renderer;
+
+            init();
+            animate();
+
+            function init() {
+
+                container = document.createElement( 'div' );
+                document.body.appendChild( container );
+
+                //camers
+                camera = new THREE.PerspectiveCamera( 60, window.innerWidth / window.innerHeight, 0.1, 1000 );
+                cameraTarget = new THREE.Vector3( 0, 0, 0 );
+                
+                //controls
+                controls = new THREE.OrbitControls( camera );
+                //controls.rotateSpeed = 3.0;
+                //controls.zoomSpeed = 5;
+                //controls.noZoom = false;
+                //controls.noPan = false;
+
+                //scene
+                scene = new THREE.Scene();
+                scene.fog = new THREE.Fog( 0xffffff, 10, 3000 );
+
+                //load stl
+                var loader = new THREE.STLLoader();
+
+                loader.load( '../model/{{StlFileName}}', function ( geometry ) {
+                    var material = new THREE.MeshLambertMaterial( { color: 0x999999} );
+
+                    var mesh = new THREE.Mesh( geometry, material );
+
+                    mesh.rotation.set( -Math.PI/2,0,0 );
+                    mesh.geometry.center();
+
+                    var box = new THREE.Box3().setFromObject( mesh );
+                    var size = box.size();
+                    console.log(size);
+
+                    camera.position.set( -size.x*2/3, 0, size.z*2 );
+
+                    scene.add( mesh );
+
+                } );
+
+                // Lights
+                scene.add( new THREE.AmbientLight( 0x999999 ) );
+                var directionalLight1 = new THREE.DirectionalLight( 0xffffff, 1 );
+                directionalLight1.position.set( 100, 100, 100 )
+                var directionalLight2 = new THREE.DirectionalLight( 0xffffff, 1 );
+                directionalLight2.position.set( -100, -100, -100 )
+                scene.add( directionalLight1 );
+                scene.add( directionalLight2 );
+
+                // renderer
+
+                renderer = new THREE.WebGLRenderer( { antialias: true } );
+                renderer.setClearColor( scene.fog.color );
+                renderer.setPixelRatio( window.devicePixelRatio );
+                renderer.setSize( window.innerWidth, window.innerHeight );
+
+                renderer.gammaInput = true;
+                renderer.gammaOutput = true;
+
+                renderer.shadowMapEnabled = true;
+                renderer.shadowMapCullFace = THREE.CullFaceBack;
+
+                container.appendChild( renderer.domElement );
+
+                window.addEventListener( 'resize', onWindowResize, false );
+
+            }
+
+            function onWindowResize() {
+                camera.aspect = window.innerWidth / window.innerHeight;
+                camera.updateProjectionMatrix();
+                renderer.setSize( window.innerWidth, window.innerHeight );
+                //controls.handleResize();
+            }
+
+            function animate() {
+                requestAnimationFrame( animate );
+                controls.update();
+                render();
+            }
+
+            function render() {
+                camera.lookAt( cameraTarget );
+                renderer.render( scene, camera );
+            }
+
+        </script>
+    </body>
+</html>

@@ -1,0 +1,23 @@
+[Unit]
+Description=Hostap daemon service
+Requires=sys-subsystem-net-devices-wlan0.device udhcpd-for-hostapd.service
+After=sys-subsystem-net-devices-wlan0.device
+Before=udhcpd-for-hostapd.service
+
+[Service]
+Type=simple
+
+# reload the driver for softap mode
+ExecStartPre=/sbin/modprobe -r rtl8192cu
+ExecStartPre=/sbin/modprobe rtl8192cu
+
+# start the service hostapd
+ExecStart=/usr/sbin/hostapd /etc/hostapd/hostapd.conf
+
+# reload the driver for sta/p2p mode
+ExecStopPost=/sbin/modprobe -r rtl8192cu
+ExecStopPost=/sbin/modprobe rtl8192cu
+
+[Install]
+WantedBy=multi-user.target
+

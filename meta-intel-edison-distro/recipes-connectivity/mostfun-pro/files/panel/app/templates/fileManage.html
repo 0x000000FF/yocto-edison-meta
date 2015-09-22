@@ -1,0 +1,115 @@
+﻿{% extends "base.html" %}
+{% block title %}{% endblock %}
+{% block fileManage %}class="active"{% endblock %}
+{% block main %}
+    <div class="row">
+        <div class="col-sm-12 col-lg-12 col-xs-12">
+            <div id="upload-drop" class="box-placeholder text-center">
+                <p><em class="fa fa-cloud-upload fa-2x"></em></p>
+                <span id="dragtext"></span>
+                <a href="#" class="form-file">
+                    <span id="choose"></span>
+                    <input id="upload-select" type="file" name="file[]" multiple="" target-view="/upload-file"/>
+                </a>
+            </div>
+            <div id="progressbar" class="progress progress-striped hidden">
+                <div role="progressbar" aria-valuenow="100" aria-valuemin="0" aria-valuemax="100"
+                     class="progress-bar progress-bar-info active"></div>
+            </div>
+        </div>
+    </div>
+
+    <div class="row">
+        <div class="col-sm-12 col-lg-12 col-xs-12">
+            <div id="filetable" class="panel panel-collapse panel-default collapse in">
+                <div id="filemanege" class="panel-heading">
+                    <a href="#" data-perform="panel-collapse" data-toggle="tooltip" title="collapse panel"
+                       class="pull-right">
+                        <em class="fa fa-minus"></em>
+                    </a>
+                </div>
+                <div class="panel-body">
+                    <table class="table table-bordered table-striped responsive" id="example">
+                        <thead>
+                        <tr>
+                            <th style="width: 5%" class="check-all">
+                                <div data-toggle="tooltip" data-title="Check All" class="checkbox c-checkbox">
+                                    <label>
+                                        <input type="checkbox">
+                                        <span class="fa fa-check"></span>
+                                    </label>
+                                </div>
+                            </th>
+                            <th id="filename"></th>
+                            <th id="description"></th>
+                            <th id="large"></th>
+                            <th id="newtime"></th>
+                            <th id="print"></th>
+                        </tr>
+                        </thead>
+                        <tbody></tbody>
+                    </table>
+                </div>
+                <div class="panel-footer">
+                    <div class="row">
+                        <div class="col-lg-6 col-md-6 col-sm-12 col-xs-12">
+                            <button class="btn btn-sm btn-primary" id="Delete"></button>
+                            <button class="btn btn-sm btn-primary" id="Export"></button>
+                            <div class="col-lg-10"></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+{% endblock %}
+
+{% block modal %}
+    {{ super() }}
+    <div id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true" class="modal fade">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" data-dismiss="modal" aria-hidden="true" class="close">×</button>
+                    <h4 id="myModalLabel" class="modal-title"></h4>
+                </div>
+                <div class="modal-body">
+                    <iframe id="myframe" frameborder="0" scrolling="no" height=400 style="width:100%" src="">
+                        <p>Your browser does not support iframes.</p>
+                    </iframe>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" data-dismiss="modal" class="btn btn-default" id="close"></button>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="uk-notify uk-notify-top-center" style="display: none;"></div>
+{% endblock %}
+
+{% block scripts %}
+    <!-- Data Table Scripts-->
+    {{ super() }}
+    <script src="static/vendor/datatable/media/js/jquery.dataTables.min.js"></script>
+    <script src="static/vendor/datatable/extensions/datatable-bootstrap/js/dataTables.bootstrap.js"></script>
+    <script src="static/vendor/datatable/extensions/datatable-bootstrap/js/dataTables.bootstrapPagination.js"></script>
+    <script src="static/vendor/datatable/extensions/ColVis/js/dataTables.colVis.min.js"></script>
+    <!-- Slider -->
+    <link rel="stylesheet" href="static/vendor/slider/css/slider.css">
+    <!--  3D View-->
+    <script src="static/3dv/src/lib/stats.js"></script>
+    <script src="static/3dv/src/lib/detector.js"></script>
+    <script src="static/3dv/src/lib/three.min.js"></script>
+    <script src="static/3dv/src/Madeleine.js"></script>
+
+    <script src="static/app/js/International/filemanage.js"></script>
+    <script src="static/app/js/getfilelistmin.js"></script>
+    <script>
+        $(document).ready(function () {
+                    //getstatus();
+                    getfilelistmin();
+                    //gettemp();
+                }
+        )
+    </script>
+{% endblock %}

@@ -1,0 +1,117 @@
+<!DOCTYPE html>
+<!--[if lt IE 7]> <html class="ie ie6 lt-ie9 lt-ie8 lt-ie7" lang="en"> <![endif]-->
+<!--[if IE 7]>    <html class="ie ie7 lt-ie9 lt-ie8"        lang="en"> <![endif]-->
+<!--[if IE 8]>    <html class="ie ie8 lt-ie9"               lang="en"> <![endif]-->
+<!--[if IE 9]>    <html class="ie ie9"                      lang="en"> <![endif]-->
+<!--[if !IE]><!-->
+{% import "bootstrap/wtf.html" as wtf %}
+<html lang="en" class="no-ie">
+<!--<![endif]-->
+<head>
+    <!-- Meta-->
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=0">
+    <title>mostfun Panel</title>
+    <!-- HTML5 shim and Respond.js IE8 support of HTML5 elements and media queries -->
+    <!--[if lt IE 9]><script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script><script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
+    <![endif]-->
+    <!-- Bootstrap CSS-->
+    <link rel="stylesheet" href="static/app/css/bootstrap.css">
+    <!-- Vendor CSS-->
+    <link rel="stylesheet" href="static/vendor/fontawesome/css/font-awesome.min.css">
+    <link rel="stylesheet" href="static/vendor/animo/animate+animo.css">
+    <!-- App CSS-->
+    <link rel="stylesheet" href="static/app/css/app.css">
+    <!-- Modernizr JS Script-->
+    <script src="static/vendor/modernizr/modernizr.js" type="application/javascript"></script>
+    <!-- FastClick for mobiles-->
+    <script src="static/vendor/fastclick/fastclick.js" type="application/javascript"></script>
+    <script src="http://libs.baidu.com/jquery/1.9.0/jquery.min.js"></script>
+    <!--
+    <script type="application/javascript">
+        $(document).ready(function () {
+            $("#btnLogin").click(function () {
+                $("#frmLogin").submit();
+            });
+        });
+    </script>
+    -->
+</head>
+<body>
+<!-- START wrapper-->
+<div style="height: 100%; padding: 50px 0; background-color: #2c3037" class="row row-table">
+    <div class="col-lg-3 col-md-4 col-sm-6 col-xs-12 align-middle">
+        <!-- START panel-->
+        <div data-toggle="play-animation" data-play="zoomIn" data-offset="0" data-duration="300"
+             class="panel widget b0">
+            <img src="static/app/img/lock-bg.jpg" class="img-responsive">
+
+            <div class="panel-body">
+                <h4 class="text-center" id="Lgn"></h4>
+
+                <div class="form-group has-feedback">
+                    <div class="pull-right">
+                        <a href="#" class="text-muted">
+                            <small id="Ini_pwd"></small>
+                            ：mostfun
+                        </a>
+                    </div>
+                    {{ wtf.quick_form(form) }}
+                </div>
+                <div class="alert alert-danger" id="err_msg" style="display: {{ style }};">
+                </div>
+                <div class="panel-body" style="padding: 0px;">
+                    <a href="#" data-toggle="modal" data-target="#webcam">
+                        <em class="fa fa-camera"><span id="came"></span></em>
+                    </a>
+                    <a href="#" id="lang_en">
+                        <img src="static/app/img/uk.jpg" style="margin-top:6px;" align="right">
+                    </a>
+                    <a href="#" id="lang_zh">
+                        <img src="static/app/img/cn.jpg" style="margin-right:15px;margin-top:6px;" align="right">
+                    </a>
+                </div>
+            </div>
+            <!-- END panel-->
+        </div>
+    </div>
+    <div id="webcam" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true" class="modal fade">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" data-dismiss="modal" aria-hidden="true" class="close">×</button>
+                    <h4 id="myModalLabel" class="modal-title"></h4>
+                </div>
+                <div class="modal-body">
+                    <div style="width: 100%;overflow: hidden;">
+                        <!--<img id="cam_img"src="192.168.1.101:8080/?action=stream" class="img-responsive xform" />-->
+                        <iframe id="camframe" frameborder="0" scrolling="no" height=400 style="width:100%;" src=''>
+                            <p>Your browser does not support iframes.</p>
+                        </iframe>
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" data-dismiss="modal" class="btn btn-default" id="close"></button>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<!-- END wrapper-->
+<!-- START Scripts-->
+<!-- Main vendor Scripts-->
+<script src="static/vendor/jquery/jquery.min.js"></script>
+<script src="static/vendor/bootstrap/js/bootstrap.min.js"></script>
+<!-- Animo-->
+<script src="static/vendor/animo/animo.min.js"></script>
+<!-- Custom script for pages-->
+<!-- Add International plug-in-->
+<script type="text/javascript" src="static/app/js/International/jquery.i18n.properties-1.0.9.js"></script>
+<script src="static/app/js/International/langSet.js"></script>
+<script src="static/app/js/International/Login.js"></script>
+<script src="static/app/js/pages.js"></script>
+<script src="static/app/js/webcam.js" type="application/javascript"></script>
+<!-- END Scripts-->
+</body>
+</html>

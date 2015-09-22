@@ -1,0 +1,42 @@
+<!--密码设置页-->
+<form class="form" action="/change-password" method="post" id="change_password_form">
+    <br>
+    <table width="165%" border="0">
+        <tr>
+            <td align="right" valign="middle" id="oldPwd"></td>
+            <td align="left" valign="middle">
+                <label class="control-label col-lg-3">
+                    <input type="password" class="form-control" value="" required="" name="old_password"
+                           id="old_password"/>
+                </label>
+            </td>
+        </tr>
+        <tr class="col-lg-12"></tr>
+        <tr>
+            <td align="right" valign="middle" id="newPwd"></td>
+            <td align="left" valign="middle">
+                <label class="control-label col-lg-3">
+                    <input type="password" class="form-control" value="" required="" name="new_password"
+                           id="new_password"/>
+                </label>
+            </td>
+        </tr>
+        <tr class="col-lg-12"></tr>
+        <tr>
+            <td align="right" valign="middle" id="copyPwd"></td>
+            <td>
+                <label class="control-label col-lg-3">
+                    <input type="password" class="form-control" value="" required="" name="rpt_password"
+                           id="rpt_password"/>
+                </label>
+            </td>
+        </tr>
+        <tr class="col-lg-12"></tr>
+    </table>
+    <div style="display:block; text-align:center">
+        <button id="change_password help-block" class="btn btn-primary" type="submit">
+            <div id="save"></div>
+        </button>
+    </div>
+    <br>
+</form>

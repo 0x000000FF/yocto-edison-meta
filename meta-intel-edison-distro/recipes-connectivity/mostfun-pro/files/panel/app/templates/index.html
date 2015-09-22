@@ -1,0 +1,412 @@
+﻿{% extends "base.html" %}
+{% block title %}{% endblock %}
+{% block index %}class="active"{% endblock %}
+{% block main %}
+    <!-- start table-->
+    <!--手机端温度信息-->
+    <div id="tem" style="display: none;">
+        <div class="col-lg-3 col-sm-6" style="padding: 0px">
+            <div class="panel widget anim-running anim-done" data-delay="100" data-offset="0" data-play="fadeInDown"
+                 data-toggle="play-animation" style="">
+                <div class="panel-body bg-primary">
+                    <div class="col-xs-8">
+                        <p class="mb0">e0settemp</p>
+                    </div>
+                    <h3 class="m0" id="e0settemp"></h3>
+                </div>
+                <div class="panel-body bg-warning">
+                    <div class="col-xs-8">
+                        <p class="mb0">e0temp</p>
+                    </div>
+                    <h3 class="m0" id="e0temp"></h3>
+                </div>
+                <div class="panel-body bg-danger">
+                    <div class="col-xs-8">
+                        <p class="mb0">bedsettemp</p>
+                    </div>
+                    <h3 class="m0" id="bedsettemp"></h3>
+                </div>
+                <div class="panel-body bg-success">
+                    <div class="col-xs-8">
+                        <p class="mb0">bedtemp</p>
+                    </div>
+                    <h3 class="m0" id="bedtemp"></h3>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="row">
+        <!--PC端温度信息-->
+        <div id="tmp_info" class="col-lg-7 col-md-6 col-xs-12">
+            <div class="panel panel-primary" style="padding-bottom:5px">
+                <div class="panel-heading">
+                    <div class="panel-title" id="deg_info"></div>
+                </div>
+                <div class="panel-body">
+                    <div id="flot-placeholder1" class="flot-chart" style="height: 320px;"></div>
+                </div>
+                <br>
+            </div>
+        </div>
+        <!-- 控制面板-->
+        <div id="ctl_pnl" class="col-lg-5 col-md-6 col-xs-12">
+            <!--<div id="mac_ctrl" class="panel widget panel-collapse panel-default collapse in">-->
+            <div id="mac_ctrl" class="panel panel-primary" style="margin-bottom:0px">
+                <div class="panel-heading">
+                    <div class="panel-title" id="con_panel"></div>
+                </div>
+                <div class="panel-body">
+                    <!--机械控制-->
+                    <div class="row" style="padding: 1%;">
+                        <table class="table responsive">
+                            <tr>
+                                <th style="padding: 1px;">
+                                    <img id="ctl_1" src="static/app/img/ctl-1.png" class="img-responsive"
+                                         style="padding: 0px;">
+                                </th>
+                                <th style="padding: 1px;">
+                                    <img id="ctl_2" src="static/app/img/ctl-2.png" class="img-responsive"
+                                         style="padding: 0px;">
+                                </th>
+                                <th style="padding: 1px;">
+                                    <img id="ctl_3" src="static/app/img/ctl-3.png" class="img-responsive"
+                                         style="padding: 0px;">
+                                </th>
+                            </tr>
+                        </table>
+                    </div>
+                    <div class="row" style="margin:0px;">
+                        <table>
+                            <tr style="border-top:15px;" id="ctl_noz">
+                                <td>
+                                    <label>
+                                        <input id="noz_heat_chk" type="checkbox"/>
+                                        <span id="Noz_heat"></span>
+                                    </label>
+                                </td>
+                                <td align="right" style="padding-bottom: 10px;">
+
+                                    <input type="text" value="" data-slider-min="0" data-slider-max="250"
+                                           data-slider-step="5"
+                                           data-slider-value="190" data-slider-orientation="horizontal" style=""
+                                           class="slider slider-horizontal form-control responsive">
+                                </td>
+                            </tr>
+                            <tr style="border-top:15px;" id="ctl_bed">
+                                <td>
+                                    <label>
+                                        <input id="bed_heat_chk" type="checkbox"/>
+                                        <span id="bed_heat"></span>
+                                    </label>
+                                </td>
+                                <td align="right" style="padding-bottom: 10px;">
+                                    <input type="text" value="" data-slider-min="0" data-slider-max="150"
+                                           data-slider-step="5"
+                                           data-slider-value="70" data-slider-orientation="horizontal" style=""
+                                           class="slider slider-horizontal form-control">
+                                </td>
+                            </tr>
+                        </table>
+                    </div>
+                    <div class="row">
+                        <div class="input-group" style="margin-left:20px;margin-right:20px;padding-top:5px;">
+                            <input id="input_cmd" type="text" class="form-control">
+
+                            <div class="input-group-btn">
+                                <button type="submit" tabindex="-1" class="btn btn-default" id="Send"></button>
+                                <button type="button" data-toggle="dropdown" class="btn btn-default dropdown-toggle">
+                                    &nbsp<span class="caret"></span>
+                                </button>
+                                <ul class="dropdown-menu pull-right">
+                                    <li>
+                                        <a href="javascript:void(0);"
+                                           onclick="document.getElementById('input_cmd').value = 'G91'"
+                                           id="Rel_coor"></a>
+                                    </li>
+                                    <li>
+                                        <a href="javascript:void(0);"
+                                           onclick="document.getElementById('input_cmd').value = 'G90'"
+                                           id="Abso_coor"></a>
+                                    </li>
+                                    <li class="divider"></li>
+                                    <li>
+                                        <a href="javascript:void(0);"
+                                           onclick="document.getElementById('input_cmd').value = 'G1 Fxx X xx Y xx'"
+                                           id="xy_spo"></a>
+                                    </li>
+                                    <li>
+                                        <a href="javascript:void(0);"
+                                           onclick="document.getElementById('input_cmd').value = 'G1 Fxx Z xx'"
+                                           id="z_spo"></a>
+                                    </li>
+                                    <li class="divider"></li>
+                                    <li>
+                                        <a href="javascript:void(0);"
+                                           onclick="document.getElementById('input_cmd').value = 'M104 T0 Sxx'"
+                                           id="Ext_heat"></a>
+                                    </li>
+                                    <li>
+                                        <a href="javascript:void(0);"
+                                           onclick="document.getElementById('input_cmd').value = 'G1 E xx'"
+                                           id="Ext_spo"></a>
+                                    </li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!--打印信息-->
+        <div class="col-lg-5 col-md-6 col-xs-12" id="info_status_div">
+            <div id="info_status" class="panel widget panel-collapse panel-primary collapse out">
+                <div class="panel-heading">
+                    <div class="panel-title" id="pri_info"></div>
+                </div>
+                <div class="row row-flush" style="margin-left:20px; margin-right:20px;">
+                    <br>
+
+                    <div class=" col-xs-7">
+                        <img id="mod_img" src="" class="img-responsive">
+                    </div>
+                    <div class="col-xs-5 align-middle p-lg">
+                        <p id="info_ptrname">：</p>
+
+                        <p id="info_layecount">：</p>
+
+                        <p id="info_layenow">：</p>
+
+                        <p id="info_layeper">：</p>
+
+                        <p id="time_left">:</p>
+
+                        <p></p>
+
+                        <p id="info_e0temp">：</p>
+
+                        <p id="info_bedtemp">：</p>
+
+                        <p>
+                            <button id="but_prt" type="button" class="btn btn-success btn-sm"></button>
+                            <button id="but_stop" type="button" class="btn btn-danger btn-sm"></button>
+                            <!--<button id="but_cam" type="button" class="btn btn-info btn-sm" data-toggle="modal" data-target="#webcam">摄像头</button>-->
+                            <!--<button data-toggle="modal" data-target="#webcam">浏览3d</button>-->
+                        </p>
+                    </div>
+                </div>
+                <br>
+            </div>
+        </div>
+    </div>
+    <div class="row">
+        <!--文件管理-->
+        <div class="col-lg-12 col-md-12 col-xs-12">
+            <div id="filetable" class="panel panel-collapse panel-primary collapse in">
+                <div class="panel-heading">
+                    <span id="fil_mag"></span>
+                    <a href="#" data-perform="panel-collapse" data-toggle="tooltip" title="collapse panel"
+                       class="pull-right">
+                        <em class="fa fa-minus"></em>
+                    </a>
+                </div>
+                <div class="panel-body">
+                    <div class="table-responsive">
+                        <table class="table table-bordered table-striped table-hover" id="example">
+                            <thead>
+                            <tr>
+                                <th id="fil_nam"></th>
+                                <th id="desp"></th>
+                                <th id="lar_sml"></th>
+                                <th id="new_tim"></th>
+                                <th id="pri"></th>
+                            </tr>
+                            </thead>
+                            <tbody></tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- end table-->
+{% endblock %}
+
+{% block modal %}
+    {{ super() }}
+    <div id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true" class="modal fade">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" data-dismiss="modal" aria-hidden="true" class="close">×</button>
+                    <h4 id="myModalLabel" class="modal-title"></h4>
+                </div>
+                <div class="modal-body">
+                    <div style="width: 100%;overflow: hidden;">
+                        <iframe id="myframe" frameborder="0" scrolling="no" height=400 style="width:100%;" src="">
+                            <p>Your browser does not support iframes.</p>
+                        </iframe>
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" data-dismiss="modal" class="btn btn-default" id="close"></button>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div id="wreplace" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true" class="modal fade">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" data-dismiss="modal" aria-hidden="true" class="close">×</button>
+                    <h4 id="myModalLabel" class="modal-title"></h4>
+                </div>
+                <div class="modal-body">
+                    <div class="panel panel-default">
+                        <div class="panel-heading" id="Refl"></div>
+                        <div class="panel-body">
+                            <form action="/" method="POST">
+                                <div data-toggle="wizard" class="form-wizard wizard-horizontal">
+                                    <!-- START Wizard Step inputs -->
+                                    <div>
+                                        <fieldset>
+                                            <!-- START row -->
+                                            <div class="row">
+                                                I love you
+                                            </div>
+                                            <!-- END row -->
+                                        </fieldset>
+                                    </div>
+                                    <!-- END Wizard Step inputs -->
+                                    <!-- START Wizard Step inputs -->
+                                    <div>
+                                        <fieldset>
+                                            <!-- START row -->
+                                            <button type="button" class="btn btn-default" onclick="movemid()"
+                                                    id="Noz_cen"></button>
+                                            <button type="button" class="btn btn-default" onclick="movemid()"
+                                                    id="Noz_hea"></button>
+                                            <!-- END row -->
+                                        </fieldset>
+                                    </div>
+                                    <!-- END Wizard Step inputs -->
+                                    <!-- START Wizard Step inputs -->
+                                    <div>
+                                        <fieldset id="Tnsert">
+                                            <!-- START row -->
+                                            <!-- END row -->
+                                        </fieldset>
+                                    </div>
+                                    <!-- END Wizard Step inputs -->
+                                    <!-- START Wizard Step inputs -->
+                                    <div>
+                                        <p>Confirm information</p>
+
+                                        <div class="row">
+                                            <div class="col-sm-2 col-xs-6 text-right">
+                                                <p>
+                                                    <strong>User</strong>
+                                                </p>
+                                            </div>
+                                            <div class="col-sm-10 col-xs-6">
+                                                <p>HGordon</p>
+                                            </div>
+                                        </div>
+                                        <div class="row">
+                                            <div class="col-sm-2 col-xs-6 text-right">
+                                                <p>
+                                                    <strong>First Name</strong>
+                                                </p>
+                                            </div>
+                                            <div class="col-sm-10 col-xs-6">
+                                                <p>Gordon</p>
+                                            </div>
+                                        </div>
+                                        <div class="row">
+                                            <div class="col-sm-2 col-xs-6 text-right">
+                                                <p>
+                                                    <strong>Last Name</strong>
+                                                </p>
+                                            </div>
+                                            <div class="col-sm-10 col-xs-6">
+                                                <p>Hunter</p>
+                                            </div>
+                                        </div>
+                                        <div class="row">
+                                            <div class="col-sm-2 col-xs-6 text-right">
+                                                <p>
+                                                    <strong>Address</strong>
+                                                </p>
+                                            </div>
+                                            <div class="col-sm-10 col-xs-6">
+                                                <p>Some Ave 123, LT, Neverland</p>
+                                            </div>
+                                        </div>
+                                        <div class="row">
+                                            <div class="col-sm-2 col-xs-6 text-right">
+                                                <p>
+                                                    <strong>Phone</strong>
+                                                </p>
+                                            </div>
+                                            <div class="col-sm-10 col-xs-6">
+                                                <p>(123) 314 1516</p>
+                                            </div>
+                                        </div>
+                                        <div class="text-right">
+                                            <button type="button" class="btn btn-success">Confirm and Proceed</button>
+                                        </div>
+                                    </div>
+                                    <!-- END Wizard Step inputs -->
+                                </div>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" data-dismiss="modal" class="btn btn-default" id="close"></button>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="uk-notify uk-notify-top-center" style="display: none;"></div>
+{% endblock %}
+
+{% block scripts %}
+    {{ super() }}
+    <!-- Data Table Scripts-->
+    <script src="static/vendor/datatable/media/js/jquery.dataTables.min.js"></script>
+    <script src="static/vendor/datatable/extensions/datatable-bootstrap/js/dataTables.bootstrap.js"></script>
+    <script src="static/vendor/datatable/extensions/datatable-bootstrap/js/dataTables.bootstrapPagination.js"></script>
+    <script src="static/vendor/datatable/extensions/ColVis/js/dataTables.colVis.min.js"></script>
+    <!--  Flot Charts-->
+    <script src="static/vendor/flot/jquery.flot.min.js"></script>
+    <script src="static/vendor/flot/jquery.flot.tooltip.min.js"></script>
+    <script src="static/vendor/flot/jquery.flot.resize.min.js"></script>
+    <script src="static/vendor/flot/jquery.flot.pie.min.js"></script>
+    <script src="static/vendor/flot/jquery.flot.time.min.js"></script>
+    <script src="static/vendor/flot/jquery.flot.categories.min.js"></script>
+    <!-- Slider -->
+    <link rel="stylesheet" href="static/vendor/slider/css/slider.css">
+    <!--  3D View-->
+    <script src="static/3dv/src/lib/stats.js"></script>
+    <script src="static/3dv/src/lib/detector.js"></script>
+    <script src="static/3dv/src/lib/three.min.js"></script>
+    <script src="static/3dv/src/Madeleine.js"></script>
+    <!-- Data mostfun Scripts-->
+    <script src="static/app/js/International/Index.js"></script>
+
+    <script src="static/app/js/getfilelist.js"></script>
+    <script src="static/app/js/gettemp.js"></script>
+    <script src="static/app/js/getstatus.js"></script>
+    <script src="static/app/js/math.js"></script>
+    <script src="static/app/js/index_ctrl.js"></script>
+    <script src="static/app/js/movectrl.js"></script>
+    <script src="static/app/js/phone-mode/index.js" type="application/javascript"></script>
+    <script>
+        $(document).ready(function () {
+                    getfilelist();
+                    getstatus();
+                    gettemp();
+                }
+        )
+    </script>
+{% endblock %}
