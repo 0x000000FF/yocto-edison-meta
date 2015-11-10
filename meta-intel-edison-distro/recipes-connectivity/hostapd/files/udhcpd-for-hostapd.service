@@ -6,7 +6,7 @@ StopWhenUnneeded=true
 
 [Service]
 Type=simple
-ExecStartPre=/sbin/ifconfig wlp0s17u1 192.168.42.1 up
+ExecStartPre=/sbin/ifconfig wlan1 192.168.42.1 up
 ExecStart=/usr/sbin/udhcpd -f -S /etc/hostapd/udhcpd-for-hostapd.conf
 Restart=on-failure
 RestartSec=1

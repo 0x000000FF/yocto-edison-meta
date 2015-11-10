@@ -44,11 +44,13 @@ IMAGE_FEATURES += "package-management ssh-server-openssh"
 IMAGE_FEATURES += "debug-tweaks"
 
 #mostfun app
-#IMAGE_INSTALL += "mostfun-pro"
+
 IMAGE_INSTALL += "mostfun-pro-panel"
 IMAGE_INSTALL += "decode"
 IMAGE_INSTALL += "updateconfig"
-#IMAGE_INSTALL += "ota-update"
+IMAGE_INSTALL += "buzzer"
+IMAGE_INSTALL += "tft-8340"
+IMAGE_INSTALL += "runstart"
 
 IMAGE_INSTALL += "connman"
 IMAGE_INSTALL += "connman-client"
@@ -147,7 +149,7 @@ IMAGE_INSTALL += "tzdata"
 
 # Edison Middleware stuff
 IMAGE_INSTALL += "packagegroup-core-buildessential"
-IMAGE_INSTALL += "iotkit-opkg"
+#IMAGE_INSTALL += "iotkit-opkg" #intel iotkit online opkg repo src
 IMAGE_INSTALL += "zeromq-dev"
 IMAGE_INSTALL += "cppzmq-dev"
 IMAGE_INSTALL += "paho-mqtt-dev"
@@ -187,5 +189,5 @@ IMAGE_INSTALL += "nfs-utils"
 IMAGE_INSTALL += "ofono"
 
 # Add battery level detection
-#IMAGE_INSTALL += "battery-voltage"
+IMAGE_INSTALL += "battery-voltage"
 

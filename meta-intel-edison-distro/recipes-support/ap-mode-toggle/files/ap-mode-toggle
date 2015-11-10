@@ -18,9 +18,9 @@ ap_start()
 
 	echo "Starting SoftAP!"
 	# reload the driver for softap mode
-	modprobe -r bcm4334x
+	modprobe -r rtl8192cu
 	sleep 1
-	modprobe bcm4334x op_mode=2
+	modprobe rtl8192cu op_mode=2
 
 	# These small sleeps are unfortunate but bcm4334x driver is not able
 	# to work properly without them.
@@ -30,14 +30,14 @@ ap_start()
 
 	# Sometimes the wlan driver is very slow to take the wlan UP,
 	# so do it here (brctl will fail otherwise)
-	ifconfig wlan0 up
+	ifconfig wlan1 up
 	sleep 1
 	# FIXME: ConnMan will try to add wlan0 to tether bridge but in Edison
 	# that currently fails with EBUSY. This is either wlan driver and/or
 	# wpa_supplicant issue. Because of this add the wlan0 to bridge
 	# manually. This is a dirty hack that will be removed when the bridging
 	# works ok. JRi 8 Dec 2014
-	brctl addif tether wlan0
+	brctl addif tether wlan1
 }
 
 ap_stop()
@@ -47,8 +47,8 @@ ap_stop()
 	echo "Stopping SoftAP!"
 	connmanctl tether wifi off
 	# reload the driver for sta/p2p mode
-	modprobe -r bcm4334x
-	modprobe bcm4334x
+	modprobe -r rtl8192cu
+	modprobe rtl8192cu
 }
 
 check_status()

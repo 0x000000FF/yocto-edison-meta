@@ -9,11 +9,9 @@ SRC_URI = "file://mostfun-panel.des3"
 LICENSE = "CLOSED"
 
 PV = "0.0"
-PR = "r0"
+PR = "r3"
 
 S = "${WORKDIR}"
-
-inherit allarch update-alternatives
 
 #FILESDIR = "${FILE_DIRNAME}/files/"
 

@@ -49,7 +49,7 @@
  
  	if (wpa_s->hw.modes == NULL) {
 +		wpa_printf(MSG_DEBUG, "P2P: Driver did not support fetching. "
-+		           "Use supported channels retrieved on interface wlan0");
++		           "Use supported channels retrieved on interface wlan1");
 +		wpa_s = wpa_s->global->ifaces;
 +
 +	}

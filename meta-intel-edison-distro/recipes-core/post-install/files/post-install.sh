@@ -131,7 +131,24 @@ set_rootpassword()
 
 decode_apps()
 {
-    /mostfun/decode.mostfun /mostfun/mostfun.des3
+    cd /mostfun
+    /mostfun/decode.mostfun /mostfun/mostfun-panel.des3
+}
+
+create_dirs()
+{
+    #mkdir /mostfun
+    mkdir /update
+    mkdir /media/sdcard
+
+    mkdir /home/mostfuncp
+    mkdir /home/mostfuncp/gcode
+    mkdir /home/mostfuncp/img
+    mkdir /home/mostfuncp/model
+    mkdir /home/mostfuncp/tmp
+    mkdir /home/mostfuncp/zip
+    mkdir /home/mostfuncp/paused
+    mkdir /home/mostfuncp/interrupted
 }
 
 # script main part
@@ -203,12 +220,23 @@ fi_assert $? "Update file system table /etc/fstab"
 set_rootpassword
 echo "set rootpasswd"
 
+create_dirs
+echo "create dirs"
+
 decode_apps
 echo "decode apps"
 
 # Setup Access Point SSID and passphrase
 setup_ap_ssid_and_passphrase
 fi_assert $? "Generating Wifi Access Point SSID and passphrase"
+
+echo "enable hostapd"
+systemctl enable hostapd
+systemctl start hostapd
+
+rm -f /lib/udev/rules.d/80-net-setup-link.rules
+
+update-rc.d start.sh defaults 97
 
 fi_echo "Post install success"
 
