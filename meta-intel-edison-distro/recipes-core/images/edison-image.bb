@@ -52,10 +52,10 @@ IMAGE_INSTALL += "buzzer"
 IMAGE_INSTALL += "tft-8340"
 IMAGE_INSTALL += "runstart"
 
-IMAGE_INSTALL += "connman"
-IMAGE_INSTALL += "connman-client"
-IMAGE_INSTALL += "connman-tools"
-IMAGE_INSTALL += "connman-init-systemd"
+#IMAGE_INSTALL += "connman"
+#IMAGE_INSTALL += "connman-client"
+#IMAGE_INSTALL += "connman-tools"
+#IMAGE_INSTALL += "connman-init-systemd"
 IMAGE_INSTALL += "ap-mode-toggle"
 IMAGE_INSTALL += "wireless-tools"
 IMAGE_INSTALL += "wpa-supplicant"
@@ -74,7 +74,7 @@ IMAGE_INSTALL += "usbutils"
 IMAGE_INSTALL += "ldd"
 IMAGE_INSTALL += "i2c-tools"
 IMAGE_INSTALL += "watchdog-sample"
-IMAGE_INSTALL += "pwr-button-handler"
+#IMAGE_INSTALL += "pwr-button-handler"
 IMAGE_INSTALL += "blink-led"
 IMAGE_INSTALL += "post-install"
 IMAGE_INSTALL += "resize-rootfs"
@@ -97,7 +97,7 @@ IMAGE_INSTALL += "alsa-utils-alsamixer alsa-utils-alsactl alsa-utils-aplay alsa-
 IMAGE_INSTALL += "python"
 
 IMAGE_INSTALL += "python-dbus python-smartpm python-pygobject python-argparse"
-IMAGE_INSTALL += "python-distutils python-pkgutil python-audio python-image python-imaging python-email python-netserver python-xmlrpc python-ctypes python-html python-compile python-misc python-numbers python-unittest python-pydoc"
+IMAGE_INSTALL += "python-distutils python-pkgutil python-audio python-image python-imaging python-email python-netserver python-xmlrpc python-ctypes python-html python-compile python-misc python-numbers python-unittest python-pydoc python-qrcode"
 
 IMAGE_INSTALL += "python-pip python-blinker python-configobj python-dominate python-flask python-flask-bootstrap python-flask-login python-flask-mail python-flask-wtf python-itsdangerous python-jinja2 python-markupsafe python-pyserial python-six python-werkzeug python-wtforms"
 
@@ -166,8 +166,8 @@ IMAGE_INSTALL += "mosquitto-dev"
 IMAGE_INSTALL += "mosquitto-clients"
 
 # node and sub-components
-IMAGE_INSTALL += "nodejs-dev"
-IMAGE_INSTALL += "nodejs-npm"
+#IMAGE_INSTALL += "nodejs-dev"
+#IMAGE_INSTALL += "nodejs-npm"
 
 # MRAA
 IMAGE_INSTALL += "mraa-dev"
@@ -189,5 +189,5 @@ IMAGE_INSTALL += "nfs-utils"
 IMAGE_INSTALL += "ofono"
 
 # Add battery level detection
-IMAGE_INSTALL += "battery-voltage"
+#IMAGE_INSTALL += "battery-voltage"
 

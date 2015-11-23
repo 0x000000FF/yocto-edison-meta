@@ -20,7 +20,7 @@ ap_start()
 	# reload the driver for softap mode
 	modprobe -r rtl8192cu
 	sleep 1
-	modprobe rtl8192cu op_mode=2
+	modprobe rtl8192cu
 
 	# These small sleeps are unfortunate but bcm4334x driver is not able
 	# to work properly without them.

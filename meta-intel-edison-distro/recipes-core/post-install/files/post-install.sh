@@ -132,7 +132,7 @@ set_rootpassword()
 decode_apps()
 {
     cd /mostfun
-    /mostfun/decode.mostfun /mostfun/mostfun-panel.des3
+    /mostfun/decode.mostfun /mostfun/panel.des3
 }
 
 create_dirs()
@@ -159,7 +159,7 @@ retry_count=$?
 set_retry_count $((${retry_count} + 1))
 fi_echo "Starting Post Install (try: ${retry_count})"
 
-systemctl start blink-led
+#systemctl start blink-led
 
 ota_done=$(fw_printenv ota_done | tr -d "ota_done=")
 if [ "$ota_done" != "1" ];
@@ -230,9 +230,9 @@ echo "decode apps"
 setup_ap_ssid_and_passphrase
 fi_assert $? "Generating Wifi Access Point SSID and passphrase"
 
-echo "enable hostapd"
-systemctl enable hostapd
-systemctl start hostapd
+# echo "enable hostapd"
+# systemctl enable hostapd
+# systemctl start hostapd
 
 rm -f /lib/udev/rules.d/80-net-setup-link.rules
 
@@ -241,7 +241,7 @@ update-rc.d start.sh defaults 97
 fi_echo "Post install success"
 
 
-systemctl stop blink-led
+#systemctl stop blink-led
 # end main part
 exit_first_install 0
 

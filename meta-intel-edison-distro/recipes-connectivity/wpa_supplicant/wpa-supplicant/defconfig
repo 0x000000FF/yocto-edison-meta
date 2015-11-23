@@ -41,7 +41,7 @@
 
 
 # Driver interface for Host AP driver
-CONFIG_DRIVER_HOSTAP=y
+CONFIG_DRIVER_HOSTAP=n
 
 # Driver interface for Agere driver
 #CONFIG_DRIVER_HERMES=y
@@ -418,7 +418,7 @@ CONFIG_CTRL_IFACE_DBUS_NEW=y
 # should be noted that this is mainly aimed at simple cases like
 # WPA2-Personal while more complex configurations like WPA2-Enterprise with an
 # external RADIUS server can be supported with hostapd.
-CONFIG_AP=y
+CONFIG_AP=n
 
 # P2P (Wi-Fi Direct)
 # This can be used to enable P2P support in wpa_supplicant. See README-P2P for

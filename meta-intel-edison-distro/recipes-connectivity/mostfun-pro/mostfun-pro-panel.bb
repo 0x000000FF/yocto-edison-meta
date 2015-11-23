@@ -4,7 +4,7 @@ SECTION = "kernel/userland"
 FILESEXTRAPATHS_prepend := "${THISDIR}/files/:"
 
 
-SRC_URI = "file://mostfun-panel.des3"
+SRC_URI = "file://panel.des3"
 
 LICENSE = "CLOSED"
 
@@ -16,10 +16,10 @@ S = "${WORKDIR}"
 #FILESDIR = "${FILE_DIRNAME}/files/"
 
 FILES_${PN}  += " \
- /mostfun/mostfun-panel.des3\
+ /mostfun/panel.des3\
 "
 
 do_install() {
         install -v -d  ${D}/mostfun/
-        install -m 0755 mostfun-panel.des3 ${D}/mostfun/
+        install -m 0755 panel.des3 ${D}/mostfun/
 }

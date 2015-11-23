@@ -23,7 +23,8 @@ SRC_URI = "file://defconfig \
            file://wpa-supplicant.sh \
            file://wpa-supplicant-${PV}.patch \
            file://wpa_cli-actions.sh \
-           git://android.googlesource.com/platform/external/wpa_supplicant_8;protocol=https;tag=android-4.4.4_r2.0.1"
+           file://wpa_supplicant_8-f62167e88c0c1b9621f2984f1a59ae7d41cf4c88.tar.gz"
+#           git://android.googlesource.com/platform/external/wpa_supplicant_8;protocol=https;tag=android-6.0.0_r5"
 
 S = "${WORKDIR}/git"
 PR = "r1"
