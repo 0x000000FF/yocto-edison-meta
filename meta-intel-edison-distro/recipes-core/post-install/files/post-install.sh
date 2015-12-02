@@ -105,10 +105,11 @@ setup_ap_ssid_and_passphrase () {
     then
         ifconfig wlan0 up
         wlan0_addr=$(cat /sys/class/net/wlan0/address | tr '[:lower:]' '[:upper:]')
-        ssid="MostFun_Pro-${wlan0_addr:12:2}-${wlan0_addr:15:2}"
+        ssid="mostfun_Pro-${wlan0_addr:12:2}-${wlan0_addr:15:2}"
 
         # Substitute the SSID
         sed -i -e 's/^ssid=.*/ssid='${ssid}'/g' /etc/hostapd/hostapd.conf
+        sed -i -e 's/^SSID=.*/SSID='${ssid}'/g' /etc/Wireless/RT2870AP/RT2870AP.dat
     fi
 
     if [ -f /factory/serial_number ] ;
@@ -225,6 +226,8 @@ echo "create dirs"
 
 decode_apps
 echo "decode apps"
+
+systemctl enable udhcpd-for-ra0
 
 # Setup Access Point SSID and passphrase
 setup_ap_ssid_and_passphrase

@@ -13,7 +13,7 @@ PR = "r0"
 
 S = "${WORKDIR}"
 
-inherit allarch update-alternatives
+inherit allarch
 
 #FILESDIR = "${FILE_DIRNAME}/files/"
 

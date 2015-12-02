@@ -11,7 +11,3 @@ mount /dev/loop0 /update
 sh /mostfun/mjpg-streamer/start.sh &
 sh /mostfun/mjpg-streamer/
 python /mostfun/panel/CPanel.py &
-
-systemctl start hostapd
-
-exit

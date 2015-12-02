@@ -9,7 +9,7 @@ SRC_URI = "file://decode.mostfun"
 LICENSE = "CLOSED"
 
 PV = "0.0"
-PR = "r0"
+PR = "r1"
 
 S = "${WORKDIR}"
 

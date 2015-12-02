@@ -105,7 +105,9 @@ IMAGE_INSTALL += "python-pip python-blinker python-configobj python-dominate pyt
 IMAGE_INSTALL += "batctl"
 # Wifi firmware
 IMAGE_INSTALL += "bcm43340-fw"
-IMAGE_INSTALL += "rtl8188cus-fw"
+#IMAGE_INSTALL += "rtl8188cus-fw"
+IMAGE_INSTALL += "mt7601u"
+IMAGE_INSTALL += "ralink-ap"
 # Bluetooth Firmware patch for 43340 and its patch utility
 IMAGE_INSTALL += "bcm43340-bt"
 # service daemon that listens to rfkill events and trigger FW patch download

@@ -8,8 +8,8 @@ SRC_URI = "file://panel.des3"
 
 LICENSE = "CLOSED"
 
-PV = "0.0"
-PR = "r3"
+PV = "0.1"
+PR = "r4"
 
 S = "${WORKDIR}"
 
