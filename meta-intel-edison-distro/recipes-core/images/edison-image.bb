@@ -51,21 +51,24 @@ IMAGE_INSTALL += "updateconfig"
 IMAGE_INSTALL += "buzzer"
 IMAGE_INSTALL += "tft-8340"
 IMAGE_INSTALL += "runstart"
+IMAGE_INSTALL += "avr-isp"
+IMAGE_INSTALL += "marlin"
+IMAGE_INSTALL += "mjpgstreamer"
 
 #IMAGE_INSTALL += "connman"
 #IMAGE_INSTALL += "connman-client"
 #IMAGE_INSTALL += "connman-tools"
 #IMAGE_INSTALL += "connman-init-systemd"
-IMAGE_INSTALL += "ap-mode-toggle"
+#IMAGE_INSTALL += "ap-mode-toggle"
 IMAGE_INSTALL += "wireless-tools"
 IMAGE_INSTALL += "wpa-supplicant"
-IMAGE_INSTALL += "hostapd-daemon"
-IMAGE_INSTALL += "bluez5-dev"
-IMAGE_INSTALL += "bluez5-obex"
+#IMAGE_INSTALL += "hostapd-daemon"
+#IMAGE_INSTALL += "bluez5-dev"
+#IMAGE_INSTALL += "bluez5-obex"
 IMAGE_INSTALL += "kernel-modules"
 IMAGE_INSTALL += "ethtool"
 IMAGE_INSTALL += "iptables"
-IMAGE_INSTALL += "libstdc++"
+#IMAGE_INSTALL += "libstdc++"
 IMAGE_INSTALL += "u-boot"
 IMAGE_INSTALL += "u-boot-fw-utils"
 IMAGE_INSTALL += "file"
@@ -82,7 +85,7 @@ IMAGE_INSTALL += "systemd-analyze"
 IMAGE_INSTALL += "wget"
 
 # Allows to enable OpenMP feature
-IMAGE_INSTALL += "libgomp"
+#IMAGE_INSTALL += "libgomp"
 
 # Add audio firmware
 IMAGE_INSTALL += "sst-fw-bin"
@@ -102,22 +105,22 @@ IMAGE_INSTALL += "python-distutils python-pkgutil python-audio python-image pyth
 IMAGE_INSTALL += "python-pip python-blinker python-configobj python-dominate python-flask python-flask-bootstrap python-flask-login python-flask-mail python-flask-wtf python-itsdangerous python-jinja2 python-markupsafe python-pyserial python-six python-werkzeug python-wtforms"
 
 #eth manegnment tool
-IMAGE_INSTALL += "batctl"
+#IMAGE_INSTALL += "batctl"
 # Wifi firmware
 IMAGE_INSTALL += "bcm43340-fw"
 #IMAGE_INSTALL += "rtl8188cus-fw"
 IMAGE_INSTALL += "mt7601u"
 IMAGE_INSTALL += "ralink-ap"
 # Bluetooth Firmware patch for 43340 and its patch utility
-IMAGE_INSTALL += "bcm43340-bt"
+#IMAGE_INSTALL += "bcm43340-bt"
 # service daemon that listens to rfkill events and trigger FW patch download
-IMAGE_INSTALL += "bluetooth-rfkill-event"
+#IMAGE_INSTALL += "bluetooth-rfkill-event"
 # Wifi driver built as a kernel module
 IMAGE_INSTALL += "bcm43340-mod"
 
 # Provides strace and gdb
-IMAGE_FEATURES += "tools-debug"
-IMAGE_INSTALL += "crashlog"
+#IMAGE_FEATURES += "tools-debug"
+#IMAGE_INSTALL += "crashlog"
 
 # Clean corrupted journald entries
 IMAGE_INSTALL += "cleanjournal"
@@ -129,10 +132,10 @@ IMAGE_INSTALL += "lsof"
 IMAGE_INSTALL += "iperf"
 
 # Add pulseaudio
-IMAGE_INSTALL += "pulseaudio-server libpulsecore libpulsecommon libpulse libpulse-simple pulseaudio-misc pulseaudio-service"
+#IMAGE_INSTALL += "pulseaudio-server libpulsecore libpulsecommon libpulse libpulse-simple pulseaudio-misc pulseaudio-service"
 
 #Add Gstreamer
-IMAGE_INSTALL += "gstreamer1.0 gstreamer1.0-meta-base gstreamer1.0-meta-audio"
+#IMAGE_INSTALL += "gstreamer1.0 gstreamer1.0-meta-base gstreamer1.0-meta-audio"
 
 # Those are necessary to manually create partitions and file systems on the eMMC
 IMAGE_INSTALL += "parted"
@@ -150,11 +153,11 @@ IMAGE_INSTALL += "tzdata"
 
 
 # Edison Middleware stuff
-IMAGE_INSTALL += "packagegroup-core-buildessential"
+#IMAGE_INSTALL += "packagegroup-core-buildessential"
 #IMAGE_INSTALL += "iotkit-opkg" #intel iotkit online opkg repo src
-IMAGE_INSTALL += "zeromq-dev"
-IMAGE_INSTALL += "cppzmq-dev"
-IMAGE_INSTALL += "paho-mqtt-dev"
+#IMAGE_INSTALL += "zeromq-dev"
+#IMAGE_INSTALL += "cppzmq-dev"
+#IMAGE_INSTALL += "paho-mqtt-dev"
 IMAGE_INSTALL += "mdns-dev"
 #IMAGE_INSTALL += "iotkit-comm-js"
 #IMAGE_INSTALL += "iotkit-comm-c-dev"
@@ -164,8 +167,8 @@ IMAGE_INSTALL += "mdns-dev"
 IMAGE_INSTALL += "oobe"
 
 # mosquitto and dependencies
-IMAGE_INSTALL += "mosquitto-dev"
-IMAGE_INSTALL += "mosquitto-clients"
+#IMAGE_INSTALL += "mosquitto-dev"
+#IMAGE_INSTALL += "mosquitto-clients"
 
 # node and sub-components
 #IMAGE_INSTALL += "nodejs-dev"
@@ -188,7 +191,7 @@ IMAGE_INSTALL += "mcu-fw-bin"
 IMAGE_INSTALL += "nfs-utils"
 
 # Add oFono
-IMAGE_INSTALL += "ofono"
+#IMAGE_INSTALL += "ofono"
 
 # Add battery level detection
 #IMAGE_INSTALL += "battery-voltage"

@@ -126,8 +126,10 @@ setup_ap_ssid_and_passphrase () {
 
 set_rootpassword()
 {
-    useradd -p \$6\$4767c.BTj7x\$W5X0l/TsrAQz1AgeExQg5xigtWjq15TFc62LDtADupRCXCZUvxoMa1bU6of7.W.ENwIUfw7hxV1E/jxgJ7Rry0 mostfun -M -g root
+#    useradd -p \$6\$4767c.BTj7x\$W5X0l/TsrAQz1AgeExQg5xigtWjq15TFc62LDtADupRCXCZUvxoMa1bU6of7.W.ENwIUfw7hxV1E/jxgJ7Rry0 root -g root
 #    useradd -p \$6\$bvVxf//fG$u7o0sr20z2fFza.qyMoMZX7BahtNVaMKLR44JGqnPeS8n/1J1Kdnf/e9Y53bMBAd9l3rQqiqgxPQbrlSMEgol/ guest -M
+    sed -i '1,1c root:\$6\$4767c.BTj7x\$W5X0l/TsrAQz1AgeExQg5xigtWjq15TFc62LDtADupRCXCZUvxoMa1bU6of7.W.ENwIUfw7hxV1E/jxgJ7Rry0:0:0:root:/home/root:/bin/sh' /etc/passwd
+    sed -i '1,1c root:\$6\$4767c.BTj7x\$W5X0l/TsrAQz1AgeExQg5xigtWjq15TFc62LDtADupRCXCZUvxoMa1bU6of7.W.ENwIUfw7hxV1E/jxgJ7Rry0:16778:0:99999:7:::' /etc/shadow
 }
 
 decode_apps()
@@ -143,6 +145,7 @@ create_dirs()
     mkdir /media/sdcard
 
     mkdir /home/mostfuncp
+    mkdir /home/backup
     mkdir /home/mostfuncp/gcode
     mkdir /home/mostfuncp/img
     mkdir /home/mostfuncp/model
@@ -152,6 +155,12 @@ create_dirs()
     mkdir /home/mostfuncp/interrupted
 }
 
+restore()
+{
+    cp /home/backup/RT2870AP.dat /etc/Wireless/RT2870AP/
+    cp /home/backup/wpa_supplicant.conf /etc/wpa_supplicant/
+    systemctl enable wpa_supplicant
+}
 # script main part
 
 # print to journal the current retry count
@@ -218,14 +227,17 @@ sed -i 's/#\/dev\/disk\/by-partlabel/\/dev\/disk\/by-partlabel/g' /etc/fstab
 fi_assert $? "Update file system table /etc/fstab"
 
 
-set_rootpassword
 echo "set rootpasswd"
+set_rootpassword
 
-create_dirs
 echo "create dirs"
+create_dirs
 
-decode_apps
+echo "reatore"
+restore
+
 echo "decode apps"
+decode_apps
 
 systemctl enable udhcpd-for-ra0
 
@@ -242,7 +254,6 @@ rm -f /lib/udev/rules.d/80-net-setup-link.rules
 update-rc.d start.sh defaults 97
 
 fi_echo "Post install success"
-
 
 #systemctl stop blink-led
 # end main part

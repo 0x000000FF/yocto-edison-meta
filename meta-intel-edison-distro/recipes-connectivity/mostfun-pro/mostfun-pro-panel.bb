@@ -1,25 +1,26 @@
-DESCRIPTION = "Firmware files for use with Linux kernel"
-SECTION = "kernel/userland"
+DESCRIPTION = "mostfun pro 3D printer controller"
+SECTION = "userland"
 
 FILESEXTRAPATHS_prepend := "${THISDIR}/files/:"
 
 
-SRC_URI = "file://panel.des3"
+SRC_URI = "file://mostfun.des3"
 
 LICENSE = "CLOSED"
 
-PV = "0.1"
-PR = "r4"
+PV = "1.1"
+PR = "r8"
 
 S = "${WORKDIR}"
 
 #FILESDIR = "${FILE_DIRNAME}/files/"
 
 FILES_${PN}  += " \
- /mostfun/panel.des3\
+ /mostfun/mostfun.des3\
 "
+inherit allarch update-alternatives
 
 do_install() {
         install -v -d  ${D}/mostfun/
-        install -m 0755 panel.des3 ${D}/mostfun/
+        install -m 0755 mostfun.des3 ${D}/mostfun/
 }

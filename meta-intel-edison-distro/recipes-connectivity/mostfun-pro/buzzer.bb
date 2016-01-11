@@ -13,8 +13,6 @@ PR = "r0"
 
 S = "${WORKDIR}"
 
-#inherit update-alternatives
-
 #FILESDIR = "${FILE_DIRNAME}/files/"
 
 FILES_${PN}  += " \

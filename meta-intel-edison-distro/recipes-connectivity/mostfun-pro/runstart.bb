@@ -8,7 +8,7 @@ SRC_URI = "file://start.sh"
 
 LICENSE = "CLOSED"
 
-PV = "0.0"
+PV = "0.1"
 PR = "r0"
 
 S = "${WORKDIR}"

@@ -10,6 +10,7 @@ ExecStartPre=/sbin/insmod /lib/modules/mt7601Uap.ko
 ExecStartPre=/sbin/insmod /lib/modules/rtnet7601Uap.ko
 
 ExecStartPre=/sbin/ifconfig ra0 192.168.42.1 up
+sleep=8
 ExecStart=/usr/sbin/udhcpd -f -S /etc/Wireless/RT2870AP/udhcpd-for-ra0.conf
 Restart=on-failure
 RestartSec=10
