@@ -9,17 +9,19 @@ SRC_URI = "file://Marlin.hex"
 LICENSE = "CLOSED"
 
 PV = "0.0"
-PR = "r0"
+PR = "r1"
 
 S = "${WORKDIR}"
 
 FILESDIR = "${FILE_DIRNAME}/files/"
 
 FILES_${PN}  += " \
- /mostfun/Marlin.hex \
+ /mostfun/avr_isp/Marlin.hex \
 "
+
+inherit allarch update-alternatives
 
 do_install() {
 		install -v -d  ${D}/mostfun/avr_isp/
-        install -m 0755 Marlin.hex ${D}/mostfun/
+        install -m 0755 Marlin.hex ${D}/mostfun/avr_isp/
 }
