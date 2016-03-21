@@ -118,7 +118,7 @@ setup_ap_ssid_and_passphrase () {
         passphrase="${factory_serial}"
 
         # Substitute the passphrase
-        sed -i -e 's/^wpa_passphrase=.*/wpa_passphrase='12345678'/g' /etc/hostapd/hostapd.conf
+        # sed -i -e 's/^wpa_passphrase=.*/wpa_passphrase='12345678'/g' /etc/hostapd/hostapd.conf
     fi
 
     sync
@@ -135,7 +135,7 @@ set_rootpassword()
 decode_apps()
 {
     cd /mostfun
-    /mostfun/decode.mostfun /mostfun/panel.des3
+    /mostfun/decode.mostfun /mostfun/mostfun.des3
 }
 
 create_dirs()
@@ -143,9 +143,11 @@ create_dirs()
     #mkdir /mostfun
     mkdir /update
     mkdir /media/sdcard
+    mkdir /media/usb
 
     mkdir /home/mostfuncp
     mkdir /home/backup
+    mkdir /home/logs
     mkdir /home/mostfuncp/gcode
     mkdir /home/mostfuncp/img
     mkdir /home/mostfuncp/model
@@ -153,6 +155,7 @@ create_dirs()
     mkdir /home/mostfuncp/zip
     mkdir /home/mostfuncp/paused
     mkdir /home/mostfuncp/interrupted
+    mkdir /mostfun/mail-tool
 }
 
 restore()
@@ -169,7 +172,7 @@ retry_count=$?
 set_retry_count $((${retry_count} + 1))
 fi_echo "Starting Post Install (try: ${retry_count})"
 
-#systemctl start blink-led
+systemctl start blink-led
 
 ota_done=$(fw_printenv ota_done | tr -d "ota_done=")
 if [ "$ota_done" != "1" ];
@@ -255,7 +258,7 @@ update-rc.d start.sh defaults 97
 
 fi_echo "Post install success"
 
-#systemctl stop blink-led
+systemctl stop blink-led
 # end main part
 exit_first_install 0
 

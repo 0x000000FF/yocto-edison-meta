@@ -1,5 +1,5 @@
-DESCRIPTION = "Firmware files for use with Linux kernel"
-SECTION = "kernel/userland"
+DESCRIPTION = "to decode mostfun-panel app"
+SECTION = "userland"
 
 FILESEXTRAPATHS_prepend := "${THISDIR}/files/:"
 

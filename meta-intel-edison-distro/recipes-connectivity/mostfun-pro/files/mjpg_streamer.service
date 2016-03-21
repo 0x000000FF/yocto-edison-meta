@@ -1,0 +1,14 @@
+[Unit]
+Description=service for mjpg streamer
+StopWhenUnneeded=false
+
+[Service]
+Type=simple
+sleep=10
+ExecStart=/mostfun/mjpgstreamer/mjpg_streamer -i "/mostfun/mjpgstreamer/input_uvc.so" -o "/mostfun/mjpgstreamer/output_file.so" &
+Restart=on-failure
+RestartSec=10
+StandardOutput=journal+console
+
+[Install]
+WantedBy=multi-user.target

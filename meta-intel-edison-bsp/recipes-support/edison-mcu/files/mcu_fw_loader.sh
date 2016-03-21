@@ -1,3 +1,4 @@
+
 #!/bin/sh
 #author: JiuJin Hong (jiujinx.hong@intel.com)
 if [ ! -d "/sys/devices/platform/intel_mcu" ];then

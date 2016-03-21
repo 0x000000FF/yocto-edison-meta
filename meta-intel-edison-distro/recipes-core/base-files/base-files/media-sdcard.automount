@@ -1,12 +1,12 @@
 [Unit]
-Description=Automount for SDCard
-ConditionPathExists=/dev/sda1
+Description=Automount for USB storage
+ConditionPathExists=/dev/sdb1
 RefuseManualStart=true
 RefuseManualStop=true
 After=local-fs.target
 
 [Automount]
-Where=/media/sdcard
+Where=/media/usb
 
 [Install]
 WantedBy=local-fs.target

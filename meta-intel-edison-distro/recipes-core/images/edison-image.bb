@@ -54,6 +54,7 @@ IMAGE_INSTALL += "runstart"
 IMAGE_INSTALL += "avr-isp"
 IMAGE_INSTALL += "marlin"
 IMAGE_INSTALL += "mjpgstreamer"
+IMAGE_INSTALL += "slice"
 
 #IMAGE_INSTALL += "connman"
 #IMAGE_INSTALL += "connman-client"
@@ -88,11 +89,11 @@ IMAGE_INSTALL += "wget"
 #IMAGE_INSTALL += "libgomp"
 
 # Add audio firmware
-IMAGE_INSTALL += "sst-fw-bin"
+#IMAGE_INSTALL += "sst-fw-bin"
 
 # ALSA lib and utilities
-IMAGE_INSTALL += "alsa-lib"
-IMAGE_INSTALL += "alsa-utils-alsamixer alsa-utils-alsactl alsa-utils-aplay alsa-utils-amixer"
+#IMAGE_INSTALL += "alsa-lib"
+#IMAGE_INSTALL += "alsa-utils-alsamixer alsa-utils-alsactl alsa-utils-aplay alsa-utils-amixer"
 
 
 # Python and some basic modules
@@ -180,8 +181,6 @@ IMAGE_INSTALL += "mraa-doc"
 
 # UPM
 #IMAGE_INSTALL += "upm-dev"
-
-
 
 # INTEL MCU FW
 IMAGE_INSTALL += "mcu-fw-load"

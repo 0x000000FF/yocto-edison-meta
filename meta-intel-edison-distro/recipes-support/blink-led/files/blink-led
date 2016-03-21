@@ -74,20 +74,21 @@ signal.signal(signal.SIGTERM, signal_term_handler)
 signal.signal(signal.SIGINT, signal_term_handler)
 
 # Init GPIO mux for LED control
-subprocess.call("""
-echo 40 >/sys/class/gpio/export
-echo 214 >/sys/class/gpio/export
-echo 243 >/sys/class/gpio/export
-echo 261 >/sys/class/gpio/export
-echo high >/sys/class/gpio/gpio214/direction
-echo mode0 > /sys/kernel/debug/gpio_debug/gpio40/current_pinmux
-echo low >/sys/class/gpio/gpio243/direction
-echo high >/sys/class/gpio/gpio261/direction
-echo low >/sys/class/gpio/gpio214/direction""", shell=True)
+# subprocess.call("""
+# echo 40 >/sys/class/gpio/export
+# echo 214 >/sys/class/gpio/export
+# echo 243 >/sys/class/gpio/export
+# echo 261 >/sys/class/gpio/export
+# echo high >/sys/class/gpio/gpio214/direction
+# echo mode0 > /sys/kernel/debug/gpio_debug/gpio40/current_pinmux
+# echo low >/sys/class/gpio/gpio243/direction
+# echo high >/sys/class/gpio/gpio261/direction
+# echo low >/sys/class/gpio/gpio214/direction""", shell=True)
+subprocess.call("""echo 12 >/sys/class/gpio/export""", shell=True) #mostfun_pro mother board
 
 # Save current LED value for reverting to proper state at exit
 try:
-    lf =  open("/sys/class/gpio/gpio40/value","r")
+    lf =  open("/sys/class/gpio/gpio12/value","r")
     v = lf.read()
     lf.close()
     if v[0] == '0':
