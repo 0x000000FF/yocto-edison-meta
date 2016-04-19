@@ -1,5 +1,5 @@
-DESCRIPTION = "Firmware files for use with Linux kernel"
-SECTION = "kernel/userland"
+DESCRIPTION = "Firmware files for update sys"
+SECTION = "userland"
 
 FILESEXTRAPATHS_prepend := "${THISDIR}/files/:"
 

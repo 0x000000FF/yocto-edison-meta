@@ -13,5 +13,5 @@ echo "" >> $VER_FILE
 echo "#define VERSION_NUMBER \"$GIT_VERSION\"" >> $VER_FILE
 echo "" >> $VER_FILE
 echo "#endif" >> $VER_FILE
-sed -i "s#^LINUX_VERSION_EXTENSION.*#LINUX_VERSION_EXTENSION ?= \"-yocto-\${LINUX_KERNEL_TYPE}-$GIT_VERSION\"#g" /media/7ac7050f-caf1-4213-98be-fa898f57e4f0/edison-src/out/linux64/poky/meta/recipes-kernel/linux/linux-yocto.inc
+sed -i "s#^LINUX_VERSION_EXTENSION.*#LINUX_VERSION_EXTENSION ?= \"-yocto-\${LINUX_KERNEL_TYPE}-$GIT_VERSION\"#g" /media/yocto/edison-src/out/linux64/poky/meta/recipes-kernel/linux/linux-yocto.inc
 echo "linux-yocto.inc have been changed!"

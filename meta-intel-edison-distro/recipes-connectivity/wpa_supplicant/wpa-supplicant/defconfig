@@ -423,7 +423,7 @@ CONFIG_AP=n
 # P2P (Wi-Fi Direct)
 # This can be used to enable P2P support in wpa_supplicant. See README-P2P for
 # more information on P2P operations.
-CONFIG_P2P=y
+CONFIG_P2P=n
 CONFIG_BGSCAN_SIMPLE=y
 
 # Autoscan

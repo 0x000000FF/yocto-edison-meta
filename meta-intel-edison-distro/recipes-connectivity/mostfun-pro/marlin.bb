@@ -1,5 +1,5 @@
-DESCRIPTION = "Firmware files for use with Linux kernel"
-SECTION = "kernel/userland"
+DESCRIPTION = "marlin hex file for avr use"
+SECTION = "userland"
 
 FILESEXTRAPATHS_prepend := "${THISDIR}/files/:"
 
@@ -16,12 +16,12 @@ S = "${WORKDIR}"
 FILESDIR = "${FILE_DIRNAME}/files/"
 
 FILES_${PN}  += " \
- /mostfun/avr_isp/Marlin.hex \
+ /mostfun/Marlin.hex \
 "
 
 inherit allarch update-alternatives
 
 do_install() {
-		install -v -d  ${D}/mostfun/avr_isp/
-        install -m 0755 Marlin.hex ${D}/mostfun/avr_isp/
+        install -v -d  ${D}/mostfun/
+        install -m 0755 Marlin.hex ${D}/mostfun/
 }

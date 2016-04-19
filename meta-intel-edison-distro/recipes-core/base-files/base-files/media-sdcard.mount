@@ -1,9 +1,9 @@
 [Unit]
 Description=Mount for SDCard
-BindsTo=dev-sda1.device
+BindsTo=dev-sdb1.device
 Conflicts=media-sdcard.automount
 
 [Mount]
-What=/dev/sda1
-Where=/media/sdcard
+What=/dev/sdb1
+Where=/media/usb
 TimeoutSec=3

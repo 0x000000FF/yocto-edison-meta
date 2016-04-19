@@ -93,6 +93,7 @@ mount_home () {
 sshd_init () {
     rm -rf /etc/ssh/*key*
     systemctl start sshdgenkeys
+    sed -i 's/^BindToDevice=/# BindToDevice=/g' /lib/systemd/system/sshd.socket ; sync ; systemctl daemon-reload; systemctl restart sshd.socket
 }
 
 
@@ -108,7 +109,7 @@ setup_ap_ssid_and_passphrase () {
         ssid="mostfun_Pro-${wlan0_addr:12:2}-${wlan0_addr:15:2}"
 
         # Substitute the SSID
-        sed -i -e 's/^ssid=.*/ssid='${ssid}'/g' /etc/hostapd/hostapd.conf
+        #sed -i -e 's/^ssid=.*/ssid='${ssid}'/g' /etc/hostapd/hostapd.conf
         sed -i -e 's/^SSID=.*/SSID='${ssid}'/g' /etc/Wireless/RT2870AP/RT2870AP.dat
     fi
 
@@ -135,7 +136,8 @@ set_rootpassword()
 decode_apps()
 {
     cd /mostfun
-    /mostfun/decode.mostfun /mostfun/panel.des3
+    /mostfun/decode.mostfun /mostfun/mostfun.des3
+    cp -f /mostfun/panel/bg/logo.bmp /mostfun/logo.bmp
 }
 
 create_dirs()
@@ -143,9 +145,11 @@ create_dirs()
     #mkdir /mostfun
     mkdir /update
     mkdir /media/sdcard
+    mkdir /media/usb
 
     mkdir /home/mostfuncp
     mkdir /home/backup
+    mkdir /home/logs
     mkdir /home/mostfuncp/gcode
     mkdir /home/mostfuncp/img
     mkdir /home/mostfuncp/model
@@ -153,6 +157,11 @@ create_dirs()
     mkdir /home/mostfuncp/zip
     mkdir /home/mostfuncp/paused
     mkdir /home/mostfuncp/interrupted
+}
+
+flash_2560()
+{
+    python /mostfun/avr_isp/stk.py /mostfun/Marlin.hex
 }
 
 restore()
@@ -169,7 +178,7 @@ retry_count=$?
 set_retry_count $((${retry_count} + 1))
 fi_echo "Starting Post Install (try: ${retry_count})"
 
-#systemctl start blink-led
+systemctl start blink-led
 
 ota_done=$(fw_printenv ota_done | tr -d "ota_done=")
 if [ "$ota_done" != "1" ];
@@ -179,7 +188,7 @@ then
     cp -R /home/* /tmp/oldhome/
     fi_assert $? "Backup home/root contents of rootfs"
 
-    # format partition home to ext4
+    # format partition home to ext4d
     mkfs.ext4 -m0 /dev/disk/by-partlabel/home
     fi_assert $? "Formatting home partition"
 
@@ -236,10 +245,11 @@ create_dirs
 echo "reatore"
 restore
 
+echo "flashing mega 2560"
+flash_2560
+
 echo "decode apps"
 decode_apps
-
-systemctl enable udhcpd-for-ra0
 
 # Setup Access Point SSID and passphrase
 setup_ap_ssid_and_passphrase
@@ -251,11 +261,16 @@ fi_assert $? "Generating Wifi Access Point SSID and passphrase"
 
 rm -f /lib/udev/rules.d/80-net-setup-link.rules
 
-update-rc.d start.sh defaults 97
+#update-rc.d start.sh defaults 97
+
+echo "set hostname"
+echo "mostfun_Pro-${wlan0_addr:12:2}-${wlan0_addr:15:2}" > /etc/hostname 
+
+systemctl enable udhcpd-for-ra0
 
 fi_echo "Post install success"
 
-#systemctl stop blink-led
+systemctl stop blink-led
 # end main part
 exit_first_install 0
 

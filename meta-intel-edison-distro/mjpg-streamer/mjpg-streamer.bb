@@ -15,7 +15,7 @@ S = "${WORKDIR}"
 
 inherit allarch update-alternatives
 
-#FILESDIR = "${FILE_DIRNAME}/files/"
+FILESDIR = "${FILE_DIRNAME}/files/"
 
 FILES_${PN}  += " \
  /

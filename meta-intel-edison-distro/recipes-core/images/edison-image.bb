@@ -46,14 +46,18 @@ IMAGE_FEATURES += "debug-tweaks"
 #mostfun app
 
 IMAGE_INSTALL += "mostfun-pro-panel"
+IMAGE_INSTALL += "mostfun-panel"
 IMAGE_INSTALL += "decode"
 IMAGE_INSTALL += "updateconfig"
 IMAGE_INSTALL += "buzzer"
 IMAGE_INSTALL += "tft-8340"
-IMAGE_INSTALL += "runstart"
+IMAGE_INSTALL += "mountupdate"
 IMAGE_INSTALL += "avr-isp"
 IMAGE_INSTALL += "marlin"
 IMAGE_INSTALL += "mjpgstreamer"
+IMAGE_INSTALL += "mail-tool"
+#IMAGE_INSTALL += "slice"
+IMAGE_INSTALL += "usbhub"
 
 #IMAGE_INSTALL += "connman"
 #IMAGE_INSTALL += "connman-client"
@@ -88,11 +92,11 @@ IMAGE_INSTALL += "wget"
 #IMAGE_INSTALL += "libgomp"
 
 # Add audio firmware
-IMAGE_INSTALL += "sst-fw-bin"
+#IMAGE_INSTALL += "sst-fw-bin"
 
 # ALSA lib and utilities
-IMAGE_INSTALL += "alsa-lib"
-IMAGE_INSTALL += "alsa-utils-alsamixer alsa-utils-alsactl alsa-utils-aplay alsa-utils-amixer"
+#IMAGE_INSTALL += "alsa-lib"
+#IMAGE_INSTALL += "alsa-utils-alsamixer alsa-utils-alsactl alsa-utils-aplay alsa-utils-amixer"
 
 
 # Python and some basic modules
@@ -101,6 +105,9 @@ IMAGE_INSTALL += "python"
 
 IMAGE_INSTALL += "python-dbus python-smartpm python-pygobject python-argparse"
 IMAGE_INSTALL += "python-distutils python-pkgutil python-audio python-image python-imaging python-email python-netserver python-xmlrpc python-ctypes python-html python-compile python-misc python-numbers python-unittest python-pydoc python-qrcode"
+
+
+#IMAGE_INSTALL += "python-pip python-blinker python-configobj python-dominate python-flask python-flask-bootstrap python-flask-login python-flask-mail python-flask-wtf python-itsdangerous python-jinja2 python-markupsafe python-six python-werkzeug python-wtforms"
 
 IMAGE_INSTALL += "python-pip python-blinker python-configobj python-dominate python-flask python-flask-bootstrap python-flask-login python-flask-mail python-flask-wtf python-itsdangerous python-jinja2 python-markupsafe python-pyserial python-six python-werkzeug python-wtforms"
 
@@ -180,8 +187,6 @@ IMAGE_INSTALL += "mraa-doc"
 
 # UPM
 #IMAGE_INSTALL += "upm-dev"
-
-
 
 # INTEL MCU FW
 IMAGE_INSTALL += "mcu-fw-load"

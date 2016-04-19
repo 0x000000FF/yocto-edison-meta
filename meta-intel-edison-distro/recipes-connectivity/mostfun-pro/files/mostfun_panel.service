@@ -1,0 +1,14 @@
+[Unit]
+Description=service for mostfun panel
+After=TFT_LCD.service
+StopWhenUnneeded=false
+
+[Service]
+Type=simple
+ExecStart=/mostfun/panel/CPanel.py
+Restart=on-failure
+RestartSec=10
+StandardOutput=journal
+
+[Install]
+WantedBy=multi-user.target

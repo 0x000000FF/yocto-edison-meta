@@ -25,18 +25,18 @@ setup: pub bbcache
 	@echo Setup buildenv for SDK host $(SDK_HOST)
 	@mkdir -p out/$(SDK_HOST)
 	./meta-intel-edison/setup.sh $(SETUP_ARGS) --dl_dir=$(BB_DL_DIR) --sstate_dir=$(BB_SSTATE_DIR) --build_dir=$(CURDIR)/out/$(SDK_HOST) --build_name=$(BUILD_TAG) --sdk_host=$(SDK_HOST)
-	@rm -f out/current
-	@ln -s $(CURDIR)/out/$(SDK_HOST) $(CURDIR)/out/current
-	@if [ $(SDK_HOST) = macosx ]; then  /bin/bash -c "source out/current/poky/oe-init-build-env $(CURDIR)/out/current/build ; bitbake odcctools2-crosssdk -c cleansstate" ; echo "Please make sure that OSX-sdk.zip is available in your bitbake download directory" ; fi
+	@rm -f out/linux64
+	@ln -s $(CURDIR)/out/$(SDK_HOST) $(CURDIR)/out/linux64
+	@if [ $(SDK_HOST) = macosx ]; then  /bin/bash -c "source out/linux64/poky/oe-init-build-env $(CURDIR)/out/linux64/build ; bitbake odcctools2-crosssdk -c cleansstate" ; echo "Please make sure that OSX-sdk.zip is available in your bitbake download directory" ; fi
 
 cleansstate: _check_setup_was_done
-	/bin/bash -c "source out/current/poky/oe-init-build-env $(CURDIR)/out/current/build ; $(CURDIR)/meta-intel-edison/utils/invalidate_sstate.sh $(CURDIR)/out/current/build"
+	/bin/bash -c "source out/linux64/poky/oe-init-build-env $(CURDIR)/out/linux64/build ; $(CURDIR)/meta-intel-edison/utils/invalidate_sstate.sh $(CURDIR)/out/linux64/build"
 
 devtools_package: _check_setup_was_done
-	/bin/bash -c "source out/current/poky/oe-init-build-env $(CURDIR)/out/current/build ; $(CURDIR)/meta-intel-edison-devtools/utils/create_devtools_package.sh $(CURDIR)/out/current/build"
+	/bin/bash -c "source out/linux64/poky/oe-init-build-env $(CURDIR)/out/linux64/build ; $(CURDIR)/meta-intel-edison-devtools/utils/create_devtools_package.sh $(CURDIR)/out/linux64/build"
 
 sdk: _check_setup_was_done
-	/bin/bash -c "source out/current/poky/oe-init-build-env $(CURDIR)/out/current/build ; bitbake edison-image -c populate_sdk"
+	/bin/bash -c "source out/linux64/poky/oe-init-build-env $(CURDIR)/out/linux64/build ; bitbake edison-image -c populate_sdk"
 
 src-package: pub
 	./meta-intel-edison-devenv/utils/create_src_package.sh
@@ -46,8 +46,8 @@ clean:
 	rm -rf out
 
 u-boot linux-externalsrc edison-image meta-toolchain arduino-toolchain virtual/kernel: _check_setup_was_done
-	/bin/bash -c "source out/current/poky/oe-init-build-env $(CURDIR)/out/current/build ; bitbake -c cleansstate $@ ; bitbake $@"
-	./meta-intel-edison/utils/flash/postBuild.sh $(CURDIR)/out/current/build
+	/bin/bash -c "source out/linux64/poky/oe-init-build-env $(CURDIR)/out/linux64/build ; bitbake -c cleansstate $@ ; bitbake $@"
+	./meta-intel-edison/utils/flash/postBuild.sh $(CURDIR)/out/linux64/build
 
 bootloader: u-boot
 
@@ -58,7 +58,7 @@ kernel: virtual/kernel
 toolchain: meta-toolchain
 
 flash: _check_postbuild_was_done
-	./out/current/build/toFlash/flashall.sh
+	./out/linux64/build/toFlash/flashall.sh
 
 debian_image:
 	$(MAKE) setup SETUP_ARGS="$(SETUP_ARGS) --deb_packages"
@@ -66,7 +66,7 @@ debian_image:
 	@echo '*******************************'
 	@echo '*******************************'
 	@echo 'Now run the following command to create the debian rootfs:'
-	@echo 'sudo $(CURDIR)/meta-intel-edison/utils/create-debian-image.sh --build_dir=$(CURDIR)/out/current/build'
+	@echo 'sudo $(CURDIR)/meta-intel-edison/utils/create-debian-image.sh --build_dir=$(CURDIR)/out/linux64/build'
 	@echo 'and run a regular make flash'
 	@echo '*******************************'
 
@@ -76,14 +76,14 @@ help:
 	@echo ' clean       - remove the out and pub directory'
 	@echo ' setup       - prepare the build env for later build operations'
 	@echo ' cleansstate - clean the sstate for some recipes to work-around some bitbake limitations'
-	@echo ' image       - build the flashable edison image, results are in out/current/build/toFlash'
-	@echo ' flash       - flash the current build image'
-	@echo ' sdk         - build the SDK for the current build'
-	@echo ' toolchain   - build the cross compilation toolchain for the current build'
+	@echo ' image       - build the flashable edison image, results are in out/linux64/build/toFlash'
+	@echo ' flash       - flash the linux64 build image'
+	@echo ' sdk         - build the SDK for the linux64 build'
+	@echo ' toolchain   - build the cross compilation toolchain for the linux64 build'
 	@echo ' arduino-toolchain'
-	@echo '             - build the Arduino toolchain for the current build'
+	@echo '             - build the Arduino toolchain for the linux64 build'
 	@echo ' src-package - create the external source package'
-	@echo ' devtools_package - build some extra dev tools packages, results are in out/current/build/devtools_packages/'
+	@echo ' devtools_package - build some extra dev tools packages, results are in out/linux64/build/devtools_packages/'
 	@echo
 	@echo 'Continuous Integration targets:'
 	@sh -c "$(MAKE) -p _no_targets | awk -F':' '/^ci_[a-zA-Z0-9][^\$$#\/\\t=]*:([^=]|$$)/ {split(\$$1,A,/ /);for(i in A)print \" \"A[i]}' | sort"
@@ -103,10 +103,10 @@ help:
 _no_targets:
 
 _check_setup_was_done:
-	@if [ ! -f $(CURDIR)/out/current/build/conf/local.conf ]; then echo Please run \"make setup\" first ; exit 1 ; fi
+	@if [ ! -f $(CURDIR)/out/linux64/build/conf/local.conf ]; then echo Please run \"make setup\" first $(CURDIR); exit 1 ; fi
 
 _check_postbuild_was_done:
-	@if [ ! -f $(CURDIR)/out/current/build/toFlash/flashall.sh ]; then echo Please run \"make image/bootloader/kernel\" first ; exit 1 ; fi
+	@if [ ! -f $(CURDIR)/out/linux64/build/toFlash/flashall.sh ]; then echo Please run \"make image/bootloader/kernel\" first ; exit 1 ; fi
 
 pub:
 	@mkdir -p $@
@@ -117,11 +117,11 @@ bbcache:
 	@mkdir -p $(BB_SSTATE_DIR)
 
 _image_archive:
-	cd $(CURDIR)/out/current/build/toFlash ; zip -r $(CURDIR)/pub/edison-image-$(BUILD_TAG).zip `ls`
-	cd $(CURDIR)/out/current/build/symbols ; zip -r $(CURDIR)/pub/symbols-$(BUILD_TAG).zip `ls`
+	cd $(CURDIR)/out/linux64/build/toFlash ; zip -r $(CURDIR)/pub/edison-image-$(BUILD_TAG).zip `ls`
+	cd $(CURDIR)/out/linux64/build/symbols ; zip -r $(CURDIR)/pub/symbols-$(BUILD_TAG).zip `ls`
 
 _devtools_package_archive:
-	cd $(CURDIR)/out/current/build/devtools_packages ; zip -r $(CURDIR)/pub/edison-devtools-packages-$(BUILD_TAG).zip `ls`
+	cd $(CURDIR)/out/linux64/build/devtools_packages ; zip -r $(CURDIR)/pub/edison-devtools-packages-$(BUILD_TAG).zip `ls`
 
 _sdk_archive:
 	cd $(CURDIR)/out/$(SDK_HOST)/build/tmp/deploy/sdk ; zip -r $(CURDIR)/pub/edison-sdk-$(SDK_HOST)-$(BUILD_TAG).zip `ls *-edison-image-*`
@@ -192,11 +192,11 @@ ci_arduino-toolchain_macosx:
 	$(MAKE) _ci_arduino-toolchain SDK_HOST=macosx
 
 ci_image-from-src-package-and-GPL-LGPL-sources_archive: setup devtools_package _devtools_package_archive src-package
-	cp $(CURDIR)/pub/edison-src-$(BUILD_TAG).tgz $(CURDIR)/out/current
-	cd $(CURDIR)/out/current ; tar -xvf edison-src-$(BUILD_TAG).tgz
-	cd $(CURDIR)/out/current/edison-src ; /bin/bash -c "SETUP_ARGS=\"$(SETUP_ARGS) --create_src_archive\" make setup cleansstate image _image_archive SDK_HOST=$(SDK_HOST)"
-	cd $(CURDIR)/out/current/edison-src/out/current/build/toFlash ; zip -r $(CURDIR)/pub/edison-image-from-src-package-$(BUILD_TAG).zip `ls`
-	cd $(CURDIR)/out/current/edison-src/out/current/build/tmp/deploy/sources ; zip -r $(CURDIR)/pub/edison-GPL_LGPL-sources-$(BUILD_TAG).zip `ls`
+	cp $(CURDIR)/pub/edison-src-$(BUILD_TAG).tgz $(CURDIR)/out/linux64
+	cd $(CURDIR)/out/linux64 ; tar -xvf edison-src-$(BUILD_TAG).tgz
+	cd $(CURDIR)/out/linux64/edison-src ; /bin/bash -c "SETUP_ARGS=\"$(SETUP_ARGS) --create_src_archive\" make setup cleansstate image _image_archive SDK_HOST=$(SDK_HOST)"
+	cd $(CURDIR)/out/linux64/edison-src/out/linux64/build/toFlash ; zip -r $(CURDIR)/pub/edison-image-from-src-package-$(BUILD_TAG).zip `ls`
+	cd $(CURDIR)/out/linux64/edison-src/out/linux64/build/tmp/deploy/sources ; zip -r $(CURDIR)/pub/edison-GPL_LGPL-sources-$(BUILD_TAG).zip `ls`
 
 ci_full:
 	$(MAKE) ci_image                             BUILD_TAG=$(BUILD_TAG)

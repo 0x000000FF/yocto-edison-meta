@@ -7,6 +7,9 @@ SRC_URI = "file://post-install.service \
 
 SYSTEMD_SERVICE_${PN} = "post-install.service"
 
+PV = "1.1"
+PR = "r1"
+
 RDEPENDS_${PN} = "systemd"
 
 do_install() {

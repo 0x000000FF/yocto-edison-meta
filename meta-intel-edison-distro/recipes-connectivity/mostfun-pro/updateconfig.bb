@@ -1,5 +1,5 @@
-DESCRIPTION = "Firmware files for use with Linux kernel"
-SECTION = "kernel/userland"
+DESCRIPTION = "online update config file,the URLs"
+SECTION = "userland"
 
 FILESEXTRAPATHS_prepend := "${THISDIR}/files/:"
 

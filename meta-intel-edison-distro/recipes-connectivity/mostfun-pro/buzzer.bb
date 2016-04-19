@@ -1,5 +1,5 @@
 DESCRIPTION = "mostfun buzzer"
-SECTION = "kernel/userland"
+SECTION = "userland"
 
 FILESEXTRAPATHS_prepend := "${THISDIR}/files/:"
 

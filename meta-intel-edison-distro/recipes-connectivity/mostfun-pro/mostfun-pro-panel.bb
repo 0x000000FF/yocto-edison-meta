@@ -3,13 +3,16 @@ SECTION = "userland"
 
 FILESEXTRAPATHS_prepend := "${THISDIR}/files/:"
 
+inherit allarch update-alternatives
+
+DEPENDS = "decode"
 
 SRC_URI = "file://mostfun.des3"
 
 LICENSE = "CLOSED"
 
-PV = "1.1"
-PR = "r8"
+PV = "1.5.4437c4e"
+PR = "r16"
 
 S = "${WORKDIR}"
 
@@ -18,7 +21,6 @@ S = "${WORKDIR}"
 FILES_${PN}  += " \
  /mostfun/mostfun.des3\
 "
-inherit allarch update-alternatives
 
 do_install() {
         install -v -d  ${D}/mostfun/
