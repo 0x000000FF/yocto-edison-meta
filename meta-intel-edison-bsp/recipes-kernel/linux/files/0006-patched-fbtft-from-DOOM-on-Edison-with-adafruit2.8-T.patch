@@ -1,0 +1,124 @@
+From b221e03f4f149b4d612b039e023a143f2b474b42 Mon Sep 17 00:00:00 2001
+From: Jakub Kramarz <jkramarz@virtuslab.com>
+Date: Tue, 16 Jun 2015 13:33:03 +0200
+Subject: [PATCH 6/6] patched fbtft from "DOOM on Edison with adafruit2.8 TFT"
+
+---
+ drivers/video/Kconfig              |  2 ++
+ drivers/video/Makefile             |  1 +
+ drivers/video/fbtft/fbtft_device.c | 60 ++++++++++++++++++++++++++++++++++++++
+ 3 files changed, 63 insertions(+)
+
+diff --git a/drivers/video/Kconfig b/drivers/video/Kconfig
+index 2e937bd..19e53aa 100644
+--- a/drivers/video/Kconfig
++++ b/drivers/video/Kconfig
+@@ -73,6 +73,8 @@ menuconfig FB
+ 	  (e.g. an accelerated X server) and that are not frame buffer
+ 	  device-aware may cause unexpected results. If unsure, say N.
+ 
++source "drivers/video/fbtft/Kconfig"
++
+ config FIRMWARE_EDID
+        bool "Enable firmware EDID"
+        depends on FB
+diff --git a/drivers/video/Makefile b/drivers/video/Makefile
+index e8bae8d..afabb80 100644
+--- a/drivers/video/Makefile
++++ b/drivers/video/Makefile
+@@ -15,6 +15,7 @@ fb-objs                           := $(fb-y)
+ obj-$(CONFIG_VT)		  += console/
+ obj-$(CONFIG_LOGO)		  += logo/
+ obj-y				  += backlight/
++obj-y                             += fbtft/
+ 
+ obj-$(CONFIG_EXYNOS_VIDEO)     += exynos/
+ 
+diff --git a/drivers/video/fbtft/fbtft_device.c b/drivers/video/fbtft/fbtft_device.c
+index b9f4c30..eaf2fc8 100644
+--- a/drivers/video/fbtft/fbtft_device.c
++++ b/drivers/video/fbtft/fbtft_device.c
+@@ -22,6 +22,9 @@
+ #include <linux/init.h>
+ #include <linux/gpio.h>
+ #include <linux/spi/spi.h>
++#include <linux/spi/intel_mid_ssp_spi.h>
++#include <asm/intel-mid.h>
++#include <linux/lnw_gpio.h>
+ 
+ #include "fbtft.h"
+ 
+@@ -174,6 +177,44 @@ static int waveshare32b_init_sequence[] = {
+ 	-1,0xE1,0x00,0x0E,0x14,0x03,0x11,0x07,0x31,0xC1,0x48,0x08,0x0F,0x0C,0x31,0x36,0x0F,
+ 	-1,0x11,-2,120,-1,0x29,-1,0x2c,-3 };
+ 
++static void tng_ssp_spi_cs_control(u32 command);
++static void tng_ssp_spi_platform_pinmux(void);
++
++static int tng_ssp_spi2_FS_gpio = 111;
++
++static struct intel_mid_ssp_spi_chip chip = {
++	.burst_size = DFLT_FIFO_BURST_SIZE,
++	.timeout = DFLT_TIMEOUT_VAL,
++	/* SPI DMA is currently not usable on Tangier */
++	.dma_enabled = false,
++	.cs_control = tng_ssp_spi_cs_control,
++	.platform_pinmux = tng_ssp_spi_platform_pinmux,
++};
++
++static void tng_ssp_spi_cs_control(u32 command)
++{
++	gpio_set_value(tng_ssp_spi2_FS_gpio, (command == CS_ASSERT) ? 0 : 1);
++}
++
++static void tng_ssp_spi_platform_pinmux(void)
++{
++	int err;
++	int saved_muxing;
++	/* Request Chip Select gpios */
++	saved_muxing = gpio_get_alt(tng_ssp_spi2_FS_gpio);
++
++	lnw_gpio_set_alt(tng_ssp_spi2_FS_gpio, LNW_GPIO);
++	err = gpio_request_one(tng_ssp_spi2_FS_gpio,
++			GPIOF_DIR_OUT|GPIOF_INIT_HIGH, "Arduino Shield SS");
++	if (err) {
++		pr_err("%s: unable to get Chip Select GPIO,\
++				fallback to legacy CS mode \n", __func__);
++		lnw_gpio_set_alt(tng_ssp_spi2_FS_gpio, saved_muxing);
++		chip.cs_control = NULL;
++		chip.platform_pinmux = NULL;
++	}
++}
++
+ /* Supported displays in alphabetical order */
+ static struct fbtft_device_display displays[] = {
+ 	{
+@@ -279,6 +320,25 @@ static struct fbtft_device_display displays[] = {
+ 			}
+ 		}
+ 	}, {
++		.name = "adafruit28_edison",
++		.spi = &(struct spi_board_info) {
++			.modalias = "fb_ili9341",
++			.max_speed_hz = 32000000,
++			.mode = SPI_MODE_0,
++			.controller_data = &chip,
++			.platform_data = &(struct fbtft_platform_data) {
++				.display = {
++					.buswidth = 8,
++					.backlight = 1,
++				},
++				.bgr = true,
++				.gpios = (const struct fbtft_gpio []) {
++					{ "dc", 183 },
++					{},
++				},
++			}
++		}
++	}, {
+ 		.name = "adafruit13m",
+ 		.spi = &(struct spi_board_info) {
+ 			.modalias = "fb_ssd1306",
+-- 
+2.1.0
+

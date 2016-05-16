@@ -5,7 +5,7 @@ LIC_FILES_CHKSUM = "file://COPYING;md5=ab87f20cd7e8c0d0a6539b34d3791d0e \
                     file://wpa_supplicant/wpa_supplicant.c;beginline=1;endline=12;md5=cba4fa09fa364da845ca546f21008909"
 
 
-SYSTEMD_SERVICE_${PN} = "wpa_supplicant.service wpa_supplicant_wlan0_event.service wpa_supplicant_p2p_event.service"
+SYSTEMD_SERVICE_${PN} = "wpa_supplicant.service wpa_supplicant_wlan0_event.service"
 
 FILESEXTRAPATHS_prepend := "${THISDIR}/wpa-supplicant:"
 
@@ -13,18 +13,15 @@ PV = "android-4.4.4_r2.0.1"
 
 SRC_URI = "file://defconfig \
            file://wpa_supplicant.conf-sane \
-           file://p2p_supplicant.conf-sane \
            file://99_wpa_supplicant \
            file://fi.w1.wpa_supplicant1.service \
-           file://udhcpd-p2p.conf \
            file://wpa_supplicant.service \
            file://wpa_supplicant_wlan0_event.service \
-           file://wpa_supplicant_p2p_event.service \
            file://wpa-supplicant.sh \
            file://wpa-supplicant-${PV}.patch \
            file://wpa_cli-actions.sh \
            file://wpa_supplicant_8-f62167e88c0c1b9621f2984f1a59ae7d41cf4c88.tar.gz"
-#           git://android.googlesource.com/platform/external/wpa_supplicant_8;protocol=https;tag=android-6.0.0_r5"
+#           git://android.googlesource.com/platform/external/wpa_supplicant_8;protocol=https;tag=android-4.4.4_r2.0.1"
 
 S = "${WORKDIR}/git"
 PR = "r1"
@@ -55,7 +52,6 @@ do_install () {
 
         install -d ${D}${sysconfdir}/wpa_supplicant
         install -m 600 ${WORKDIR}/wpa_supplicant.conf-sane ${D}${sysconfdir}/wpa_supplicant/wpa_supplicant.conf
-        install -m 600 ${WORKDIR}/p2p_supplicant.conf-sane ${D}${sysconfdir}/wpa_supplicant/p2p_supplicant.conf
 
         install -d ${D}/${sysconfdir}/dbus-1/system.d
         install -m 644 ${S}/wpa_supplicant/dbus/dbus-wpa_supplicant.conf ${D}/${sysconfdir}/dbus-1/system.d
@@ -75,10 +71,6 @@ do_install () {
             # Install wpa_supplicant_event service for udhcp client start/stop based on wifi connection/disconnection
             install -m 755 ${WORKDIR}/wpa_cli-actions.sh ${D}${sysconfdir}/wpa_supplicant
             install -m 644 ${WORKDIR}/wpa_supplicant_wlan0_event.service ${D}${systemd_unitdir}/system
-            install -m 644 ${WORKDIR}/wpa_supplicant_p2p_event.service ${D}${systemd_unitdir}/system
-
-            # Install udhcp server configuration file for P2P GO
-            install -m 644 ${WORKDIR}/udhcpd-p2p.conf ${D}${sysconfdir}/wpa_supplicant
         fi
 
         install -d ${D}/etc/default/volatiles

@@ -1,0 +1,64 @@
+DESCRIPTION = "mostfun panel file"
+SECTION = "userland"
+
+FILESEXTRAPATHS_prepend := "${THISDIR}/files/:"
+
+LICENSE = "CLOSED"
+
+PV = "1.14.b6c1823"
+PR = "r28"
+
+RDEPENDS_${PN} = "systemd"
+RDEPENDS_${PN} += "bash"
+
+SRC_URI = "file://mostfun.des3 \
+			file://panel-install.service \
+            file://panel-install.sh \
+            file://mostfun_panel.service"
+
+SYSTEMD_SERVICE_${PN} = "panel-install.service"
+SYSTEMD_SERVICE_${PN} += "mostfun_panel.service"
+SYSTEMD_AUTO_ENABLE = "enable"
+
+S = "${WORKDIR}"
+
+inherit allarch update-alternatives
+
+FILESDIR = "${FILE_DIRNAME}/files/"
+
+FILES_${PN} = "${base_libdir}/systemd/system/*.service \
+				${sysconfdir} \
+				/sbin/panel-install.sh \
+				/mostfun/mostfun.des3 \
+				"
+
+do_install() {
+	install -v -d  ${D}/mostfun/
+	install -m 0755 mostfun.des3 ${D}/mostfun/
+	install -d ${D}/sbin
+	install -c -m 0744 ${WORKDIR}/panel-install.sh ${D}/sbin
+	install -d ${D}${systemd_unitdir}/system
+	install -d ${D}${sysconfdir}/systemd/system/basic.target.wants
+	install -c -m 0644 ${WORKDIR}/panel-install.service ${D}${systemd_unitdir}/system
+	sed -i -e 's,@BASE_BINDIR@,${base_bindir},g' \
+		-e 's,@BASE_SBINDIR@,${base_sbindir},g' \
+		-e 's,@SBINDIR@,${sbindir},g' \
+		-e 's,@BINDIR@,${bindir},g' \
+		${D}${systemd_unitdir}/system/panel-install.service
+
+	# enable services
+	ln -sf ${systemd_unitdir}/system/panel-install.service \
+		${D}${sysconfdir}/systemd/system/basic.target.wants/panel-install.service
+
+    if ${@base_contains('DISTRO_FEATURES','systemd','true','false',d)}; then
+        install -d ${D}/${systemd_unitdir}/system
+        install -m 644 ${WORKDIR}/mostfun_panel.service ${D}${systemd_unitdir}/system/
+	fi
+}
+
+# As this package is tied to systemd, only build it when we're also building systemd.
+python () {
+    if not bb.utils.contains ('DISTRO_FEATURES', 'systemd', True, False, d):
+        raise bb.parse.SkipPackage("'systemd' not in DISTRO_FEATURES")
+
+}

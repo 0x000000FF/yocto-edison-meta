@@ -7,7 +7,11 @@ SRC_URI = "file://post-install.service \
 
 SYSTEMD_SERVICE_${PN} = "post-install.service"
 
+PV = "1.7"
+PR = "r4"
+
 RDEPENDS_${PN} = "systemd"
+RDEPENDS_${PN} += "bash"
 
 do_install() {
 	install -d ${D}/sbin

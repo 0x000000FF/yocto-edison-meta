@@ -93,6 +93,7 @@ mount_home () {
 sshd_init () {
     rm -rf /etc/ssh/*key*
     systemctl start sshdgenkeys
+    sed -i 's/^BindToDevice=/# BindToDevice=/g' /lib/systemd/system/sshd.socket ; sync ; systemctl daemon-reload; systemctl restart sshd.socket
 }
 
 
@@ -105,10 +106,10 @@ setup_ap_ssid_and_passphrase () {
     then
         ifconfig wlan0 up
         wlan0_addr=$(cat /sys/class/net/wlan0/address | tr '[:lower:]' '[:upper:]')
-        ssid="mostfun_Pro-${wlan0_addr:12:2}-${wlan0_addr:15:2}"
+        ssid="mostfun-${wlan0_addr:12:2}${wlan0_addr:15:2}"
 
         # Substitute the SSID
-        sed -i -e 's/^ssid=.*/ssid='${ssid}'/g' /etc/hostapd/hostapd.conf
+        #sed -i -e 's/^ssid=.*/ssid='${ssid}'/g' /etc/hostapd/hostapd.conf
         sed -i -e 's/^SSID=.*/SSID='${ssid}'/g' /etc/Wireless/RT2870AP/RT2870AP.dat
     fi
 
@@ -118,7 +119,7 @@ setup_ap_ssid_and_passphrase () {
         passphrase="${factory_serial}"
 
         # Substitute the passphrase
-        # sed -i -e 's/^wpa_passphrase=.*/wpa_passphrase='12345678'/g' /etc/hostapd/hostapd.conf
+        sed -i -e 's/^wpa_passphrase=.*/wpa_passphrase='12345678'/g' /etc/hostapd/hostapd.conf
     fi
 
     sync
@@ -130,12 +131,6 @@ set_rootpassword()
 #    useradd -p \$6\$bvVxf//fG$u7o0sr20z2fFza.qyMoMZX7BahtNVaMKLR44JGqnPeS8n/1J1Kdnf/e9Y53bMBAd9l3rQqiqgxPQbrlSMEgol/ guest -M
     sed -i '1,1c root:\$6\$4767c.BTj7x\$W5X0l/TsrAQz1AgeExQg5xigtWjq15TFc62LDtADupRCXCZUvxoMa1bU6of7.W.ENwIUfw7hxV1E/jxgJ7Rry0:0:0:root:/home/root:/bin/sh' /etc/passwd
     sed -i '1,1c root:\$6\$4767c.BTj7x\$W5X0l/TsrAQz1AgeExQg5xigtWjq15TFc62LDtADupRCXCZUvxoMa1bU6of7.W.ENwIUfw7hxV1E/jxgJ7Rry0:16778:0:99999:7:::' /etc/shadow
-}
-
-decode_apps()
-{
-    cd /mostfun
-    /mostfun/decode.mostfun /mostfun/mostfun.des3
 }
 
 create_dirs()
@@ -155,7 +150,6 @@ create_dirs()
     mkdir /home/mostfuncp/zip
     mkdir /home/mostfuncp/paused
     mkdir /home/mostfuncp/interrupted
-    mkdir /mostfun/mail-tool
 }
 
 restore()
@@ -173,6 +167,9 @@ set_retry_count $((${retry_count} + 1))
 fi_echo "Starting Post Install (try: ${retry_count})"
 
 systemctl start blink-led
+/etc/freshpage.sh /mostfun/TFT/upgrading.bmp
+#show upgrading
+echo "upgrading"
 
 ota_done=$(fw_printenv ota_done | tr -d "ota_done=")
 if [ "$ota_done" != "1" ];
@@ -182,7 +179,7 @@ then
     cp -R /home/* /tmp/oldhome/
     fi_assert $? "Backup home/root contents of rootfs"
 
-    # format partition home to ext4
+    # format partition home to ext4d
     mkfs.ext4 -m0 /dev/disk/by-partlabel/home
     fi_assert $? "Formatting home partition"
 
@@ -239,26 +236,26 @@ create_dirs
 echo "reatore"
 restore
 
-echo "decode apps"
-decode_apps
-
-systemctl enable udhcpd-for-ra0
-
 # Setup Access Point SSID and passphrase
 setup_ap_ssid_and_passphrase
 fi_assert $? "Generating Wifi Access Point SSID and passphrase"
 
-# echo "enable hostapd"
-# systemctl enable hostapd
-# systemctl start hostapd
 
 rm -f /lib/udev/rules.d/80-net-setup-link.rules
 
-update-rc.d start.sh defaults 97
+#update-rc.d start.sh defaults 97
 
-fi_echo "Post install success"
+echo "set hostname"
+echo "mostfun-${wlan0_addr:12:2}${wlan0_addr:15:2}" > /etc/hostname 
+
+systemctl enable udhcpd-for-ra0
+systemctl enable mjpg_streamer
+
+systemctl start panel-install
 
 systemctl stop blink-led
+fi_echo "Post install success"
+
 # end main part
 exit_first_install 0
 

@@ -1,5 +1,5 @@
-DESCRIPTION = "Firmware files for use with Linux kernel"
-SECTION = "kernel/userland"
+DESCRIPTION = "online update config file,the URLs"
+SECTION = "userland"
 
 FILESEXTRAPATHS_prepend := "${THISDIR}/files/:"
 
@@ -8,8 +8,8 @@ SRC_URI = "file://myfeeds.conf"
 
 LICENSE = "CLOSED"
 
-PV = "0.0"
-PR = "r0"
+PV = "0.3"
+PR = "r1"
 
 S = "${WORKDIR}"
 

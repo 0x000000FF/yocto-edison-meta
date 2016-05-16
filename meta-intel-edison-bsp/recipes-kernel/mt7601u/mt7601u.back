@@ -1,0 +1,11 @@
+DESCRIPTION = "Broadcom wifi driver for the 43340"
+LICENSE = "CLOSED"
+
+SRC_URI = "file://mt7601u.tar.gz"
+
+inherit module
+
+PV = "0.0"
+PR = "r1"
+
+S = "${WORKDIR}/"

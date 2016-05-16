@@ -1,27 +1,41 @@
-DESCRIPTION = "Firmware files for use with Linux kernel"
-SECTION = "kernel/userland"
+DESCRIPTION = "marlin hex file for avr use"
+SECTION = "userland"
 
 FILESEXTRAPATHS_prepend := "${THISDIR}/files/:"
 
-
-SRC_URI = "file://Marlin.hex"
-
 LICENSE = "CLOSED"
 
-PV = "0.0"
-PR = "r1"
+PV = "1.10"
+PR = "r8"
+
+RDEPENDS_${PN} = "systemd"
+
+SRC_URI = "file://Marlin.hex \
+			file://marlin-install.service \
+            file://marlin-install.sh \
+            "
+
+SYSTEMD_SERVICE_${PN} = "marlin-install.service"
+SYSTEMD_AUTO_ENABLE = "enable"
 
 S = "${WORKDIR}"
 
+inherit systemd update-alternatives
+
 FILESDIR = "${FILE_DIRNAME}/files/"
 
-FILES_${PN}  += " \
- /mostfun/avr_isp/Marlin.hex \
-"
-
-inherit allarch update-alternatives
+FILES_${PN} += "/etc/marlin-install.sh \
+				/mostfun/Marlin.hex \
+				"
 
 do_install() {
-		install -v -d  ${D}/mostfun/avr_isp/
-        install -m 0755 Marlin.hex ${D}/mostfun/avr_isp/
+	install -v -d  ${D}/mostfun/
+    install -v -d  ${D}/etc/
+    install -m 0755 marlin-install.sh ${D}/etc/
+    install -m 0755 Marlin.hex ${D}/mostfun/
+
+    if ${@base_contains('DISTRO_FEATURES','systemd','true','false',d)}; then
+        install -d ${D}/${systemd_unitdir}/system
+        install -m 644 ${WORKDIR}/marlin-install.service ${D}${systemd_unitdir}/system/
+	fi
 }

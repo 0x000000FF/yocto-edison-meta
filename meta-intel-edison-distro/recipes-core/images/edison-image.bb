@@ -46,15 +46,20 @@ IMAGE_FEATURES += "debug-tweaks"
 #mostfun app
 
 IMAGE_INSTALL += "mostfun-pro-panel"
+#IMAGE_INSTALL += "mostfun-panel"
 IMAGE_INSTALL += "decode"
-IMAGE_INSTALL += "updateconfig"
+#IMAGE_INSTALL += "updateconfig"
+IMAGE_INSTALL += "updateconfigdev"
 IMAGE_INSTALL += "buzzer"
 IMAGE_INSTALL += "tft-8340"
-IMAGE_INSTALL += "runstart"
+IMAGE_INSTALL += "mountupdate"
 IMAGE_INSTALL += "avr-isp"
 IMAGE_INSTALL += "marlin"
 IMAGE_INSTALL += "mjpgstreamer"
-IMAGE_INSTALL += "slice"
+IMAGE_INSTALL += "mail-tool"
+#IMAGE_INSTALL += "slice"
+IMAGE_INSTALL += "usbhub"
+#IMAGE_INSTALL += "models"
 
 #IMAGE_INSTALL += "connman"
 #IMAGE_INSTALL += "connman-client"
@@ -69,7 +74,7 @@ IMAGE_INSTALL += "wpa-supplicant"
 IMAGE_INSTALL += "kernel-modules"
 IMAGE_INSTALL += "ethtool"
 IMAGE_INSTALL += "iptables"
-#IMAGE_INSTALL += "libstdc++"
+IMAGE_INSTALL += "libstdc++"
 IMAGE_INSTALL += "u-boot"
 IMAGE_INSTALL += "u-boot-fw-utils"
 IMAGE_INSTALL += "file"
@@ -78,7 +83,7 @@ IMAGE_INSTALL += "usbutils"
 IMAGE_INSTALL += "ldd"
 IMAGE_INSTALL += "i2c-tools"
 IMAGE_INSTALL += "watchdog-sample"
-#IMAGE_INSTALL += "pwr-button-handler"
+IMAGE_INSTALL += "pwr-button-handler"
 IMAGE_INSTALL += "blink-led"
 IMAGE_INSTALL += "post-install"
 IMAGE_INSTALL += "resize-rootfs"
@@ -102,6 +107,9 @@ IMAGE_INSTALL += "python"
 
 IMAGE_INSTALL += "python-dbus python-smartpm python-pygobject python-argparse"
 IMAGE_INSTALL += "python-distutils python-pkgutil python-audio python-image python-imaging python-email python-netserver python-xmlrpc python-ctypes python-html python-compile python-misc python-numbers python-unittest python-pydoc python-qrcode"
+
+
+#IMAGE_INSTALL += "python-pip python-blinker python-configobj python-dominate python-flask python-flask-bootstrap python-flask-login python-flask-mail python-flask-wtf python-itsdangerous python-jinja2 python-markupsafe python-six python-werkzeug python-wtforms"
 
 IMAGE_INSTALL += "python-pip python-blinker python-configobj python-dominate python-flask python-flask-bootstrap python-flask-login python-flask-mail python-flask-wtf python-itsdangerous python-jinja2 python-markupsafe python-pyserial python-six python-werkzeug python-wtforms"
 
@@ -154,7 +162,7 @@ IMAGE_INSTALL += "tzdata"
 
 
 # Edison Middleware stuff
-#IMAGE_INSTALL += "packagegroup-core-buildessential"
+IMAGE_INSTALL += "packagegroup-core-buildessential"
 #IMAGE_INSTALL += "iotkit-opkg" #intel iotkit online opkg repo src
 #IMAGE_INSTALL += "zeromq-dev"
 #IMAGE_INSTALL += "cppzmq-dev"
