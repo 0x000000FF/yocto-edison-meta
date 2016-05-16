@@ -18,7 +18,7 @@ PV = "0.1"
 PR = "r1"
 
 SYSTEMD_SERVICE_${PN} = "mjpg_streamer.service"
-SYSTEMD_AUTO_ENABLE = "enable"
+SYSTEMD_AUTO_ENABLE = "disable"
 
 S = "${WORKDIR}"
 

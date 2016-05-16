@@ -7,7 +7,7 @@ StopWhenUnneeded=false
 Type=simple
 ExecStart=/mostfun/panel/CPanel.py
 Restart=on-failure
-RestartSec=10
+RestartSec=5
 StandardOutput=journal
 
 [Install]

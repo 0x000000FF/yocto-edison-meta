@@ -8,8 +8,8 @@ SRC_URI = "file://avr_isp.tar.gz"
 
 LICENSE = "CLOSED"
 
-PV = "0.0"
-PR = "r0"
+PV = "0.1"
+PR = "r1"
 
 S = "${WORKDIR}"
 

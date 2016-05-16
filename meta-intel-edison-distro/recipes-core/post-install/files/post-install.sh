@@ -106,7 +106,7 @@ setup_ap_ssid_and_passphrase () {
     then
         ifconfig wlan0 up
         wlan0_addr=$(cat /sys/class/net/wlan0/address | tr '[:lower:]' '[:upper:]')
-        ssid="mostfun_Pro-${wlan0_addr:12:2}-${wlan0_addr:15:2}"
+        ssid="mostfun-${wlan0_addr:12:2}${wlan0_addr:15:2}"
 
         # Substitute the SSID
         #sed -i -e 's/^ssid=.*/ssid='${ssid}'/g' /etc/hostapd/hostapd.conf
@@ -133,13 +133,6 @@ set_rootpassword()
     sed -i '1,1c root:\$6\$4767c.BTj7x\$W5X0l/TsrAQz1AgeExQg5xigtWjq15TFc62LDtADupRCXCZUvxoMa1bU6of7.W.ENwIUfw7hxV1E/jxgJ7Rry0:16778:0:99999:7:::' /etc/shadow
 }
 
-decode_apps()
-{
-    cd /mostfun
-    /mostfun/decode.mostfun /mostfun/mostfun.des3
-    cp -f /mostfun/panel/bg/logo.bmp /mostfun/logo.bmp
-}
-
 create_dirs()
 {
     #mkdir /mostfun
@@ -159,11 +152,6 @@ create_dirs()
     mkdir /home/mostfuncp/interrupted
 }
 
-flash_2560()
-{
-    python /mostfun/avr_isp/stk.py /mostfun/Marlin.hex
-}
-
 restore()
 {
     cp /home/backup/RT2870AP.dat /etc/Wireless/RT2870AP/
@@ -179,6 +167,9 @@ set_retry_count $((${retry_count} + 1))
 fi_echo "Starting Post Install (try: ${retry_count})"
 
 systemctl start blink-led
+/etc/freshpage.sh /mostfun/TFT/upgrading.bmp
+#show upgrading
+echo "upgrading"
 
 ota_done=$(fw_printenv ota_done | tr -d "ota_done=")
 if [ "$ota_done" != "1" ];
@@ -245,32 +236,26 @@ create_dirs
 echo "reatore"
 restore
 
-echo "flashing mega 2560"
-flash_2560
-
-echo "decode apps"
-decode_apps
-
 # Setup Access Point SSID and passphrase
 setup_ap_ssid_and_passphrase
 fi_assert $? "Generating Wifi Access Point SSID and passphrase"
 
-# echo "enable hostapd"
-# systemctl enable hostapd
-# systemctl start hostapd
 
 rm -f /lib/udev/rules.d/80-net-setup-link.rules
 
 #update-rc.d start.sh defaults 97
 
 echo "set hostname"
-echo "mostfun_Pro-${wlan0_addr:12:2}-${wlan0_addr:15:2}" > /etc/hostname 
+echo "mostfun-${wlan0_addr:12:2}${wlan0_addr:15:2}" > /etc/hostname 
 
 systemctl enable udhcpd-for-ra0
+systemctl enable mjpg_streamer
 
-fi_echo "Post install success"
+systemctl start panel-install
 
 systemctl stop blink-led
+fi_echo "Post install success"
+
 # end main part
 exit_first_install 0
 
