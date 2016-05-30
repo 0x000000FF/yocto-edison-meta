@@ -1,0 +1,74 @@
+<p style="text-align: center;">
+    <div class="panel panel-mostfun">
+        <div class="panel-heading">
+            {{RouterSettingText}}
+        </div>
+
+        <div class="panel-body">
+            <form class="form-horizontal">
+                <div class="form-group">
+                    <label class="col-lg-offset-3 col-lg-2 control-label">{{RouterNameText}}</label>
+                    <div class="col-lg-6">
+                        <input type="text" id="routerName" placeholder="{{RouterNameText}}" class="form-control">
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label class="col-lg-offset-3 col-lg-2 control-label">{{RouterPasswordText}}</label>
+                    <div class="col-lg-6">
+                        <input type="password" id="routerPassword" placeholder="{{RouterPasswordText}}" class="form-control">
+                    </div>
+                </div>
+                <div class="form-group">
+                    <div class="col-lg-offset-5 col-lg-10">
+                        <button type="button" class="btn btn-sm btn-primary" id="saveRouterSettingButton">{{SaveButtonText}}</button>
+                    </div>
+                </div>
+            </form>
+        </div>
+
+    </div>
+
+
+    <div class="panel panel-mostfun">
+        <div class="panel-heading">{{CurWifiConnectionText}}
+        </div>
+
+        <div class="panel-body">
+            <div class="row" style="text-align: center;">
+                <p><strong id="curWifiName">unknow</strong></p>
+            </div>
+        </div>
+    </div>
+
+
+
+    <div class="panel panel-mostfun">
+        <div class="panel-heading">{{AvailableWifiText}}
+            <button style="float:right;" class="btn btn-primary btn-sm glyphicon glyphicon-refresh" id="getAvailableWifiButton">
+
+            </button>
+        </div>
+
+        <div class="panel-body">
+
+            <table>
+                <thead>
+                    <tr>
+                        <th width="400">{{WifiNameText}}</th>
+                        <th width="350">{{WifiStrengthText}}</th>
+                        <th width="350">{{EncryptionProtocolText}}</th>
+                        <th width="200">{{ConnectText}}</th>
+                    </tr>
+                </thead>
+                <tbody id="availableWifiTableBody">
+                </tbody>
+            </table>
+
+            <div id="wifiTableFooter"></div>
+        </div>
+
+    </div>
+
+
+
+</p>

@@ -1,0 +1,77 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+    "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<title>MJPEG-Streamer</title>
+</head>
+<script type="text/javascript">
+
+/* Copyright (C) 2007 Richard Atterer, richard©atterer.net
+   This program is free software; you can redistribute it and/or modify it
+   under the terms of the GNU General Public License, version 2. See the file
+   COPYING for details. */
+
+var imageNr = 0; // Serial number of current image
+var finished = new Array(); // References to img objects which have finished downloading
+var paused = false;
+
+function isMobile() {
+
+        var system = {
+            win: false,
+            mac: false,
+            xll: false,
+            ipad: false
+        };
+
+        var p = navigator.platform;
+        system.win = p.indexOf("Win") === 0;
+        system.mac = p.indexOf("Mac") === 0;
+        system.x11 = (p === "X11") || (p.indexOf("Linux") === 0);
+        system.ipad = (navigator.userAgent.match(/iPad/i) !== null) ? true : false;
+
+        return !(system.win || system.mac || system.xll || system.ipad);
+}
+
+function createImageLayer() {
+  var img = new Image();
+  var d = new Date()
+
+  img.style.position = "absolute";
+  img.style.zIndex = -1;
+  if(isMobile()){
+	img.style.width = "100%";
+  }
+  img.onload = imageOnload;
+  img.onerror = createImageLayer;
+  img.onclick = imageOnclick;
+  img.src = "/snapshot/?n=" + d.getTime();
+  var webcam = document.getElementById("webcam");
+  webcam.insertBefore(img, webcam.firstChild);
+}
+
+// Two layers are always present (except at the very beginning), to avoid flicker
+function imageOnload() {
+
+  this.style.zIndex = imageNr; // Image finished, bring to front!
+  while (1 < finished.length) {
+    var del = finished.shift(); // Delete old image(s) from document
+    del.parentNode.removeChild(del);
+  }
+  finished.push(this);
+
+  if (!paused) createImageLayer();
+}
+
+function imageOnclick() { // Clicking on the image will pause the stream
+  paused = !paused;
+  if (!paused) createImageLayer();
+}
+
+</script>
+<body onload="createImageLayer();">
+
+<div id="webcam"><noscript><img src="/snapshot/" /></noscript></div>
+
+</body>
+</html>

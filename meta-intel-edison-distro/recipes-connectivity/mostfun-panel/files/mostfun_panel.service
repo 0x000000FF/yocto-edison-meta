@@ -1,0 +1,16 @@
+[Unit]
+Description=service for mostfun panel
+After=TFT_LCD.service
+StopWhenUnneeded=false
+
+[Service]
+Type=simple
+BusName=cc.mostfun.panel
+Environment="DBUS_SESSION_BUS_ADDRESS=unix:path=/var/run/dbus/system_bus_socket"
+ExecStart=/mostfun/panel/CPanel.py
+Restart=on-failure
+RestartSec=5
+StandardOutput=journal
+
+[Install]
+WantedBy=multi-user.target

@@ -1,0 +1,9 @@
+diff --git a/units/systemd-udevd.service.in b/units/systemd-udevd.service.in
+--- a/units/systemd-udevd.service.in
++++ b/units/systemd-udevd.service.in
+@@ -21,4 +21,4 @@
+ Restart=always
+ RestartSec=0
+ ExecStart=/lib/systemd/systemd-udevd
+-MountFlags=slave
++MountFlags=shared

@@ -1,0 +1,25 @@
+<div class = " panel panel-primary">
+    <div class = "panel-heading">{{ConnectText}}:{{wifiNameText}}
+    </div>
+    <div class = "panel-body">
+
+        <p id = "connectinput" class = "has-error" style = "text-align: center; display: block;" >
+            <label>Password
+                <input id = "wifiPassword" type = "password">
+            </label>
+
+            <code id = "wifiPasswordCharactersRequires"
+                  style = "display:none;">{{WifiPasswordCharactersRequiresText}}</code>
+
+            <br>
+            <br>
+
+            <button id = "wifi_ConnectButton" class = "btn btn-primary" type = "button">
+                {{SaveButtonText}}
+            </button>
+        </p>
+
+        <div id = "connectload" class = "has-error loader" style = "text-align: center; display: none;"></div>
+
+    </div>
+</div>

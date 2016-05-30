@@ -7,3 +7,4 @@ index d99bd3e..4517cfe 100644
  Type=oneshot
  ExecStart=@SYSTEMCTL@ --force reboot
 +ExecStartPre=/bin/sh -c " if test -e /run/systemd/reboot-param ; then read REBOOTPARAM < /run/systemd/reboot-param ; fw_setenv bootargs_mode $REBOOTPARAM ; fi "
+

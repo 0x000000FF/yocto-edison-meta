@@ -1,0 +1,99 @@
+<div class="centreContent" id="homePage">
+
+    <div class="row">
+        <div class="col-lg-8 col-sm-12">
+            <div class="panel panel-mostfun">
+
+                <div class="panel-heading">
+                    {{TemperatureInfoText}}
+                </div>
+
+                <div class="panel-body">
+                    <div class="row">
+                        {{#temperaturesInfo}}
+                        <span class="label temperatureLabel" style="background:{{bedTargetTemperatureColor}}">{{BedTargetTemperatureText}}
+                        <i id="bedTargetTemperature">NaN</i>°C
+                    </span>
+                        <span class="label temperatureLabel" style="background:{{bedTemperatureColor}}">{{BedTemperatureText}}
+                        <i id="bedTemperature">NaN</i>°C
+                    </span>
+                        <span class="label temperatureLabel" style="background:{{extruderTargetTemperatureColor}}">{{ExtruderTargetTemperatureText}}
+                        <i id="extruderTargetTemperature">NaN</i>°C
+                    </span>
+                        <span class="label temperatureLabel" style="background:{{extruderTemperatureColor}}">{{ExtruderTemperatureText}}
+                        <i id="extruderTemperature">NaN</i>°C
+                    </span> {{/temperaturesInfo}}
+
+                        <canvas id="temperatureChart" style="width:100%;position: relative;"></canvas>
+                    </div>
+                </div>
+            </div>
+            <div id="gCodeControlPanel" class="panel panel-mostfun">
+
+                <div class="panel-heading">
+                    {{GCodeControlText}}
+                </div>
+
+                <div class="panel-body">
+
+                    <div id="gcodeLogWindow" style="height:7em;overflow-y:scroll;color:dodgerblue;font-size: small;">
+                    </div>
+
+                    <div class="input-group">
+                        <input id="panelCmdText" class="form-control" type="text" list="fastCmd">
+                        <span class="input-group-btn">
+                            <input id="sendPanelCmdButton" type="button" class="btn btn-primary" value="{{SendButtonText}}">
+                        </span>
+                        <datalist id="fastCmd">
+                            <option value="M109 S0" />
+                            <option value="M109 S200.000000" />
+                            <option value="M190 S0" />
+                            <option value="M190 S70.000000" />
+                        </datalist>
+
+                    </div>
+
+                </div>
+            </div>
+        </div>
+
+        <div class="col-lg-4 col-sm-12">
+            <div class=" panel panel-mostfun">
+                <div class="panel-heading">
+                    {{MostFunControlPanelText}}
+                </div>
+                <div class="panel-body">
+                    {{{ControlPanel}}} {{{StatusPanel}}}
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div id="reprintableTableRow" class="row">
+
+        <div class="col-lg-12">
+
+            <div class=" panel panel-mostfun">
+                <div class="panel-heading">
+                    {{ReprintableTableText}}
+                </div>
+
+                <div class="panel-body">
+                    <table>
+                        <thead>
+                            <tr>
+                                <th width="450">{{ReprintableFileNameText}}</th>
+                                <th width="200">{{ReprintableFileCreatedDateText}}</th>
+                                <th width="450">{{ReprintableFileOperateText}}</th>
+                            </tr>
+                        </thead>
+                        <tbody id="reprintableTableBody">
+                        </tbody>
+                    </table>
+                    <div id="reprintableTableFooter"></div>
+                </div>
+            </div>
+        </div>
+
+    </div>
+</div>

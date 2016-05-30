@@ -1,0 +1,64 @@
+<section class="wrapper">
+
+    <nav role="navigation" class="navbar navbar-default navbar-top navbar-fixed-top">
+        <div class="navbar-header">
+            <a href="javascript:void(0);" class="navbar-brand" style="color: white;background-color:#353560;">
+                <div class="brand-logo">mostfun Panel</div>
+                <div class="brand-logo-collapsed">Panel</div>
+            </a>
+        </div>
+
+        <div class="nav-wrapper">
+
+            <ul class="nav navbar-nav">
+                <li>
+                    <a href="javascript:void(0);" id="toggleAsideButton">
+                        <em class="fa fa-align-left"></em>
+                    </a>
+                </li>
+                <li>
+                    <a href="javascript:void(0);" data-toggle="aside" id="openCameraButton">
+                        <em class="fa fa-video-camera"> {{PageCameraText}}</em>
+                    </a>
+                </li>
+                <li>
+                    <a href="javascript:void(0);" data-toggle="aside" id="takePhotoButton">
+                        <em class="fa fa-camera"> {{TakePhotoText}}</em>
+                    </a>
+                </li>
+            </ul>
+            <ul class="nav navbar-nav navbar-right">
+                <li>
+                    <a href="javascript:void(0);" data-toggle="aside" id="stopImmediatelyButton">
+                        <em class="fa fa-exclamation-triangle"> {{StopText}}</em>
+                    </a>
+                </li>
+            </ul>
+        </div>
+    </nav>
+
+    <aside class="aside">
+        <nav class="sidebar">
+            {{{leftCanvasContent}}}
+        </nav>
+    </aside>
+
+    <section>
+        <section class="main-content" style="min-height: 480px;">
+            {{#centreContent}} {{{.}}} {{/centreContent}}
+        </section>
+    </section>
+
+</section>
+
+<div class="modal fade" id="mainModal" tabindex="-1" role="dialog" data-keyboard="false" data-backdrop="static">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <button id="closeModalButton" type="button" class="close" data-dismiss="modal" aria-label="Close" style="margin-right: 0.5em;">
+                <span aria-hidden="true">&times;</span>
+            </button>
+            <div class="modal-body" id="mainModalContent" style="overflow: hidden;margin-right: 1.5em;">
+            </div>
+        </div>
+    </div>
+</div>

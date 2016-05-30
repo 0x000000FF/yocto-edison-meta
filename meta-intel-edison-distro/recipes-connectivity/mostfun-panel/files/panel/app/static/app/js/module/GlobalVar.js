@@ -1,0 +1,1 @@
+define(["require"],function(e){"use strict";return{mainContent:null,language:null,isMobile:!1,threejsRenderer:null,debug:!1}});

@@ -1,0 +1,212 @@
+﻿{% extends "base.html" %}
+{% block title %}most3D模型库{% endblock %}
+
+{% block main %}
+    <div class="row">
+        <div class="col-lg-4">
+            <!-- 控制面板-->
+            <div class="panel panel-default">
+                <div class="panel-heading">
+                    <div class="panel-title">控制面板</div>
+                </div>
+                <!--机械控制-->
+                <div class="row">
+                    <div class="col-xs-8">
+                        <div class="row">
+                            <div class="col-xs-offset-5 col-xs-offset-5">
+                                <div class="btn-group-vertical">
+                                    <button type="button" class="btn btn-oval btn-default"
+                                            style="padding-right: 5px;padding-left: 5px;" onclick="movexyz('y', 10)">
+                                        <em class="fa fa-arrow-up"></em><br>10
+                                    </button>
+                                    <button type="button" class="btn btn-default"
+                                            style="padding-right: 5px;padding-left: 5px;" onclick="movexyz('y', 1)">1
+                                    </button>
+                                    <button type="button" class="btn btn-default"
+                                            style="padding-right: 5px;padding-left: 5px;" onclick="movexyz('y', 0.1)">
+                                        0.1
+                                    </button>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-xs-11 col-xs-11 col-xs-offset-1 col-xs-offset-1">
+                                <div class="btn-group">
+                                    <button type="button" class="btn btn-oval btn-default"
+                                            style="padding-right: 5px;padding-left: 5px;" onclick="movexyz('x', -10)">
+                                        <em class="fa fa-arrow-left"></em> 10
+                                    </button>
+                                    <button type="button" class="btn btn-default"
+                                            style="padding-right: 10px;padding-left: 10px;" onclick="movexyz('x', -1)">1
+                                    </button>
+                                    <button type="button" class="btn btn-default"
+                                            style="padding-right: 5px;padding-left: 5px;" onclick="movexyz('x', -0.1)">
+                                        0.1
+                                    </button>
+                                    <button type="button" class="btn btn-default" onclick="movexyz('all', 0)">H</button>
+                                    <button type="button" class="btn btn-default"
+                                            style="padding-right: 5px;padding-left: 5px;" onclick="movexyz('x', 0.1)">
+                                        0.1
+                                    </button>
+                                    <button type="button" class="btn btn-default"
+                                            style="padding-right: 10px;padding-left: 10px;" onclick="movexyz('x', 1)">1
+                                    </button>
+                                    <button type="button" class="btn btn-oval btn-default"
+                                            style="padding-right: 5px;padding-left: 5px;" onclick="movexyz('x', 10)">
+                                        10 <em class="fa fa-arrow-right"></em>
+                                    </button>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-xs-offset-5">
+                                <div class="btn-group-vertical">
+                                    <button type="button" class="btn btn-default"
+                                            style="padding-right: 5px;padding-left: 5px;" onclick="movexyz('y', -0.1)">
+                                        0.1
+                                    </button>
+                                    <button type="button" class="btn btn-default"
+                                            style="padding-right: 5px;padding-left: 5px;" onclick="movexyz('y', -1)">1
+                                    </button>
+                                    <button type="button" class="btn btn-oval btn-default"
+                                            style="padding-right: 5px;padding-left: 5px;" onclick="movexyz('y', -10)">
+                                        10<br>
+                                        <em class="fa fa-arrow-down"></em>
+                                    </button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-xs-2">
+                        <div class="row">
+                            <div class="btn-group-vertical">
+                                <button type="button" class="btn btn-oval btn-default"
+                                        style="padding-right: 5px;padding-left: 5px;" onclick="movexyz('z', 10)">
+                                    <em class="fa fa-arrow-up"></em><br>10
+                                </button>
+                                <button type="button" class="btn btn-default"
+                                        style="padding-right: 5px;padding-left: 5px;" onclick="movexyz('z', 1)">1
+                                </button>
+                                <button type="button" class="btn btn-default"
+                                        style="padding-right: 5px;padding-left: 5px;" onclick="movexyz('z', 0.1)">0.1
+                                </button>
+                            </div>
+                        </div>
+                        <div class="row"><br></div>
+                        <div class="row">
+                            <div class="btn-group-vertical">
+                                <button type="button" class="btn btn-default"
+                                        style="padding-right: 5px;padding-left: 5px;" onclick="movexyz('z', -0.1)">0.1
+                                </button>
+                                <button type="button" class="btn btn-default"
+                                        style="padding-right: 5px;padding-left: 5px;" onclick="movexyz('z', -1)">1
+                                </button>
+                                <button type="button" class="btn btn-oval btn-default"
+                                        style="padding-right: 5px;padding-left: 5px;" onclick="movexyz('z', -10)">
+                                    10<br><em class="fa fa-arrow-down"></em>
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-xs-2">
+                        <div class="row">
+                            <div class="btn-group-vertical">
+                                <button type="button" class="btn btn-oval btn-default"
+                                        style="padding-right: 5px;padding-left: 5px;" onclick="movexyz('e0', -10)">
+                                    <em class="fa fa-arrow-up"></em><br>10
+                                </button>
+                                <button type="button" class="btn btn-default"
+                                        style="padding-right: 5px;padding-left: 5px;" onclick="movexyz('e0', -1)">1
+                                </button>
+                                <button type="button" class="btn btn-default"
+                                        style="padding-right: 5px;padding-left: 5px;" onclick="movexyz('e0', -0.1)">0.1
+                                </button>
+                            </div>
+                        </div>
+                        <div class="row"><br></div>
+                        <div class="row">
+                            <div class="btn-group-vertical">
+                                <button type="button" class="btn btn-default"
+                                        style="padding-right: 5px;padding-left: 5px;" onclick="movexyz('e0', 0.1)">0.1
+                                </button>
+                                <button type="button" class="btn btn-default"
+                                        style="padding-right: 5px;padding-left: 5px;" onclick="movexyz('e0', 1)">1
+                                </button>
+                                <button type="button" class="btn btn-oval btn-default"
+                                        style="padding-right: 5px;padding-left: 5px;" onclick="movexyz('e0', 10)">
+                                    10<br><em class="fa fa-arrow-down"></em>
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <br>
+                <!--<div class=" col-md-9">-->
+                <div class="input-group">
+                    <input id="input_cmd" type="text" class="form-control">
+
+                    <div class="input-group-btn">
+                        <button type="button" tabindex="-1" class="btn btn-default" onclick="send()">发送</button>
+                        <button type="button" data-toggle="dropdown" class="btn btn-default dropdown-toggle">
+                            &nbsp<span class="caret"></span>
+                        </button>
+                        <ul class="dropdown-menu pull-right">
+                            <li>
+                                <a href="javascript:void(0);"
+                                   onclick="document.getElementById('input_cmd').value = 'G91'">相对坐标系</a>
+                            </li>
+                            <li>
+                                <a href="javascript:void(0);"
+                                   onclick="document.getElementById('input_cmd').value = 'G90'">绝对坐标系</a>
+                            </li>
+                            <li class="divider"></li>
+                            <li>
+                                <a href="javascript:void(0);"
+                                   onclick="document.getElementById('input_cmd').value = 'G1 Fxx X xx Y xx'">XY运动</a>
+                            </li>
+                            <li>
+                                <a href="javascript:void(0);"
+                                   onclick="document.getElementById('input_cmd').value = 'G1 Fxx Z xx'">Z运动</a>
+                            </li>
+                            <li class="divider"></li>
+                            <li>
+                                <a href="javascript:void(0);"
+                                   onclick="document.getElementById('input_cmd').value = 'M109 T0 Sxx'">挤出机加热</a>
+                            </li>
+                            <li>
+                                <a href="javascript:void(0);"
+                                   onclick="document.getElementById('input_cmd').value = 'G1 E xx'">挤出机运动</a>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+                <br>
+                <input type="text" value="" data-slider-min="0" data-slider-max="250" data-slider-step="1"
+                       data-slider-value="10" data-slider-orientation="horizontal" style=""
+                       class="slider slider-horizontal form-control">
+                <br>
+            </div>
+        </div>
+    </div>
+
+{% endblock %}
+
+{% block modal %}
+    {{ super() }}
+{% endblock %}
+
+{% block scripts %}
+    {{ super() }}
+    <script src="/static/app/js/movectrl.js"></script>
+    <!--<script>
+    window.onload = function (){
+        $.get('./send/G91', function (data) {
+        });
+    }
+
+    window.onunload = function () {
+        $.get('./send/G90', function (data) {
+        });
+    }
+    </script>-->
+{% endblock %}

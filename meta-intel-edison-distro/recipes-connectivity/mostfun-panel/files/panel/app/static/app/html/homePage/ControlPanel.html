@@ -1,0 +1,91 @@
+<div id="controlPanel">
+
+
+    <div class="row" style="text-align:center;">
+
+        {{{controlSvg}}}
+        <div class="row">
+
+            <div class="btn-group">
+                <a class="btn btn-primary btn-lg controlPanelButton" data-cmd="G1 F4000 Z-1">z-1</a>
+                <a class="btn btn-primary btn-lg controlPanelButton" data-cmd="G1 F4000 Z-0.1">z-0.1</a>
+                <a class="btn btn-primary btn-lg controlPanelButton" data-cmd="G1 F4000 Z0.1">z+0.1</a>
+                <a class="btn btn-primary btn-lg controlPanelButton" data-cmd="G1 F4000 Z1">z+1</a>
+            </div>
+        </div>
+        <br>
+
+
+        <div class="row">
+            <div class="btn-group">
+                <a class="btn btn-primary btn-lg controlPanelButton" data-cmd="G1 F1800 E-1">e-1</a>
+                <a class="btn btn-primary btn-lg controlPanelButton" data-cmd="G1 F1800 E-0.1">e-0.1</a>
+                <a class="btn btn-primary btn-lg controlPanelButton" data-cmd="G1 F120 E0.1">e+0.1</a>
+                <a class="btn btn-primary btn-lg controlPanelButton" data-cmd="G1 F120 E1">e+1</a>
+            </div>
+        </div>
+        <br>
+
+        <div class="row">
+            <div id="levellingPlatformButton" class="btn btn-warning btn-lg">{{LevellingButtonText}}</div>
+        </div>
+    </div>
+
+    <br>
+    <br> {{#temperaturesInfo}}
+
+    <div class="row" style="text-align:center;">
+
+        <div class="col-lg-8 col-sm-9">
+            <label class="label" style="background:{{extruderTemperatureColor}}">{{ExtruderTemperatureText}}</label>
+        </div>
+        <div class="col-lg-4 col-sm-3">
+            <label class="switch">
+                <input class="switch-input" id="activeExtruderTemperature" type="checkbox" name="activeExtruderTemperature">
+                <span></span>
+            </label>
+        </div>
+
+    </div>
+    {{/temperaturesInfo}}
+
+    <div class="row" style="text-align:center;">
+        <div class="col-lg-8 col-sm-12">
+            <div class="temperaturesSlider" data-checkboxid="activeExtruderTemperature" data-inputid="extruderTemperatureSliderNumber">
+
+                <input type="range" value="0" min="0" max="250" step="1">
+            </div>
+        </div>
+
+        <div class="col-lg-4 col-sm-12">
+            <input class="temperatureInput" style="width:3em;" type="number" value="0" id="extruderTemperatureSliderNumber" data-checkboxid="activeExtruderTemperature" data-cmd="M104 S">
+        </div>
+    </div>
+
+    <br> {{#temperaturesInfo}}
+    <div class="row" style="text-align:center;">
+        <div class="col-lg-8 col-sm-9">
+            <label class="label" style="background:{{bedTemperatureColor}}">{{BedTemperatureText}}</label>
+        </div>
+        <div class="col-lg-4 col-sm-3">
+            <label class="switch">
+                <input class="switch-input" id="activeBedTemperature" type="checkbox" name="activeBedTemperature">
+                <span></span>
+            </label>
+        </div>
+    </div>
+    {{/temperaturesInfo}}
+
+    <div class="row" style="text-align:center;">
+        <div class="col-lg-8 col-sm-12">
+            <div class="slider slider-horizontal temperaturesSlider" data-checkboxid="activeBedTemperature" data-inputid="bedTemperatureSliderNumber">
+                <input type="range" value="0" min="0" max="150" step="1">
+            </div>
+        </div>
+        <div class="col-lg-4 col-sm-12">
+            <input class="temperatureInput" style="width:3em;" type="number" value="0" id="bedTemperatureSliderNumber" data-checkboxid="activeBedTemperature" data-cmd="M140 S">
+        </div>
+    </div>
+
+
+</div>

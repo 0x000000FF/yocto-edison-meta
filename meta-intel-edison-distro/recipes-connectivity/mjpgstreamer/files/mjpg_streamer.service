@@ -1,0 +1,14 @@
+[Unit]
+Description=service for mjpg streamer
+After=usbhub.service
+StopWhenUnneeded=false
+
+[Service]
+Type=simple
+ExecStart=/etc/mjpg_streamer.sh
+Restart=on-failure
+RestartSec=10
+StandardOutput=journal
+
+[Install]
+WantedBy=multi-user.target

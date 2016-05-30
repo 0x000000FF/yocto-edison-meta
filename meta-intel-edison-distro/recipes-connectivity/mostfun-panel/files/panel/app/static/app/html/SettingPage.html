@@ -1,0 +1,66 @@
+<div class="centreContent" id="settingPage" style="display:none;">
+
+    <div class="row">
+        <div class="col-lg-12">
+            <div class="panel panel-mostfun">
+                <div class="panel-heading">
+                    mostfun {{SettingText}}
+                </div>
+
+                <div class="panel-body">
+                    <ul class="nav nav-tabs">
+                        <li class="active">
+                            <a href="#passwordSetting" data-toggle="tab">
+                                <i class="fa fa-key"></i> {{PasswordSettingText}}
+                            </a>
+                        </li>
+                        <li>
+                            <a href="#firmwareSetting" data-toggle="tab">
+                                <i class="fa fa-gears (alias)"></i> {{FirmwareSettingText}}
+                            </a>
+                        </li>
+                        <li>
+                            <a id="emailSettingTab" href="#emailSetting" data-toggle="tab">
+                                <i class="glyphicon glyphicon-envelope"></i> {{EmailSettingText}}
+                            </a>
+                        </li>
+                        <li>
+                            <a href="#wifiSetting" data-toggle="tab">
+                                <i class="glyphicon glyphicon-signal"></i> {{WifiSettingText}}
+                            </a>
+                        </li>
+                        <li>
+                            <a href="#languageSetting" data-toggle="tab">
+                                <i class="glyphicon glyphicon-globe"></i> Language
+                            </a>
+                        </li>
+                    </ul>
+
+                    <div class="tab-content">
+                        <div class="tab-pane fade active in" id="passwordSetting">
+                            {{#passwordSetting}} {{{.}}} {{/passwordSetting}}
+                        </div>
+
+                        <div class="tab-pane fade" id="firmwareSetting">
+                            {{#firmwareSetting}} {{{.}}} {{/firmwareSetting}}
+                        </div>
+
+                        <div class="tab-pane fade" id="emailSetting">
+                            {{#emailSetting}} {{{.}}} {{/emailSetting}}
+                        </div>
+
+                        <div class="tab-pane fade" id="wifiSetting">
+                            {{#wifiSetting}} {{{.}}} {{/wifiSetting}}
+                        </div>
+
+                        <div class="tab-pane fade" id="languageSetting">
+                            {{#languageSetting}} {{{.}}} {{/languageSetting}}
+                        </div>
+
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+</div>

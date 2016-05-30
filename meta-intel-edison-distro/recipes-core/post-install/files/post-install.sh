@@ -137,8 +137,6 @@ create_dirs()
 {
     #mkdir /mostfun
     mkdir /update
-    mkdir /media/sdcard
-    mkdir /media/usb
 
     mkdir /home/mostfuncp
     mkdir /home/backup
@@ -242,6 +240,7 @@ fi_assert $? "Generating Wifi Access Point SSID and passphrase"
 
 
 rm -f /lib/udev/rules.d/80-net-setup-link.rules
+sed -i -e 's/^MountFlags=.*/MountFlags='shared'/g' /lib/systemd/system/systemd-udevd.service
 
 #update-rc.d start.sh defaults 97
 
@@ -250,8 +249,6 @@ echo "mostfun-${wlan0_addr:12:2}${wlan0_addr:15:2}" > /etc/hostname
 
 systemctl enable udhcpd-for-ra0
 systemctl enable mjpg_streamer
-
-systemctl start panel-install
 
 systemctl stop blink-led
 fi_echo "Post install success"

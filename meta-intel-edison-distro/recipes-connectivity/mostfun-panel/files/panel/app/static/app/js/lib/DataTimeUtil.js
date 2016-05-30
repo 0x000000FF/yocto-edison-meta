@@ -1,0 +1,1 @@
+define(["require","exports","module"],function(e,t){"use strict";function n(e){var t=r(e.getHours()),n=r(e.getMinutes()),i=r(e.getSeconds());return t+":"+n+":"+i}function r(e){return 2<=e.toString().length?e:"0"+e}t.formatDateToTime=n});

@@ -1,0 +1,16 @@
+[Unit]
+Description=service for TFT 8340
+After=usbhub.service
+StopWhenUnneeded=false
+
+[Service]
+Type=simple
+
+ExecStart=/mostfun/TFT/TFT_8340 /mostfun/TFT/logo.bmp
+ExecStartPost=/etc/creatpidfile.sh TFT_8340
+Restart=on-failure
+RestartSec=10
+StandardOutput=journal
+
+[Install]
+WantedBy=multi-user.target

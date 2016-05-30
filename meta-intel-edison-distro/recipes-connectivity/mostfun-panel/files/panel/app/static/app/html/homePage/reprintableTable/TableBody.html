@@ -1,0 +1,12 @@
+{{#reprintItems}}
+<tr data-filename="{{name}}" data-flag="{{flag}}">
+    <td>{{name}}</td>
+    <td>{{date}}</td>
+    <td>
+        <div class="btn-group" style="margin-top: 0.5em;">
+            <a class="btn btn-success ReprintButton">{{ReprintButtonText}}</a>
+            <a class="btn btn-danger CancelReprintButton">{{DeleteButtonText}}</a>
+        </div>
+    </td>
+</tr>
+{{/reprintItems}}

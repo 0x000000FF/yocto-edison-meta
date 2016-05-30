@@ -1,0 +1,87 @@
+<form class = "form-horizontal">
+    <div id = "emailSettingHeader" class = "form-group text-center" style = "display: none;">
+    </div>
+    <div id = "emailSettingBody" style = "display: block;">
+        <div class = "form-group">
+            <label class = "col-lg-offset-3 col-lg-2 control-label">{{NicknameText}}</label>
+            <div class = "col-lg-6">
+                <input type = "email"
+                       id = "nickname"
+                       placeholder = "{{NicknameText}}"
+                       class = "form-control emailPageInput">
+            </div>
+        </div>
+        <div class = "form-group">
+            <label class = "col-lg-offset-3 col-lg-2 control-label">{{HostEmailText}}</label>
+            <div class = "col-lg-6">
+                <input type = "email"
+                       id = "hostEmail"
+                       placeholder = "{{HostEmailText}}"
+                       class = "form-control emailPageInput">
+            </div>
+        </div>
+        <div class = "form-group">
+            <label class = "col-lg-offset-3 col-lg-2 control-label">{{HostEmailPasswordText}}</label>
+            <div class = "col-lg-6">
+                <input type = "password"
+                       id = "hostEmailPassword"
+                       placeholder = "{{HostEmailPasswordText}}"
+                       class = "form-control emailPageInput">
+            </div>
+        </div>
+        <div class = "form-group">
+            <label class = "col-lg-offset-3 col-lg-2 control-label">{{HostServerText}}</label>
+            <div class = "col-lg-6">
+                <input type = "text"
+                       id = "hostServer"
+                       placeholder = "{{HostServerText}}"
+                       class = "form-control emailPageInput">
+            </div>
+        </div>
+        <div class = "form-group">
+            <label class = "col-lg-offset-3 col-lg-2 control-label">{{HostServerPortText}}</label>
+            <div class = "col-lg-6">
+                <input type = "text"
+                       id = "hostServerPort"
+                       placeholder = "{{HostServerPortText}}"
+                       class = "form-control emailPageInput">
+            </div>
+        </div>
+        <div class = "form-group">
+            <label class = "col-lg-offset-3 col-lg-2 control-label">{{EmailPrefixText}}</label>
+            <div class = "col-lg-6">
+                <input type = "text"
+                       id = "emailPrefix"
+                       placeholder = "{{EmailPrefixText}}"
+                       class = "form-control emailPageInput">
+            </div>
+        </div>
+        <div class = "form-group">
+            <label class = "col-lg-offset-3 col-lg-2 control-label">{{ReceiveEmailText}}</label>
+            <div class = "col-lg-6">
+                <input type = "email"
+                       id = "receiveEmail"
+                       placeholder = "{{ReceiveEmailText}}"
+                       class = "form-control emailPageInput">
+            </div>
+        </div>
+
+        <div class = "form-group">
+            <label class = "col-lg-offset-3 col-lg-2 control-label">{{EmailSwitchText}}</label>
+            <div class = "col-lg-6">
+                <label class = "switch">
+                    <input class = "switch-input" id = "emailSwitch" type = "checkbox">
+                    <span></span>
+                </label>
+            </div>
+        </div>
+
+        <div class = "form-group">
+            <div class = "col-lg-offset-5 col-lg-10">
+                <button type = "button" class = "btn btn-sm btn-primary emailPageInput" id = "saveEmailButton">
+                    {{SaveButtonText}}
+                </button>
+            </div>
+        </div>
+    </div>
+</form>

@@ -38,6 +38,7 @@ SRC_URI = "git://anongit.freedesktop.org/systemd/systemd;branch=master;protocol=
            file://systemd-older-kernel.patch \
           "
 
+
 S = "${WORKDIR}/git"
 
 SRC_URI_append_libc-uclibc = "\

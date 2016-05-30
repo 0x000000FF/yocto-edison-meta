@@ -1,0 +1,72 @@
+﻿<div class="row">
+    <div class="col-sm-9 col-lg-9 col-xs-9" id="fileManage-file">
+        <div id="upload-drop" class="box-placeholder text-center" style="height: 188px;">
+            <p style="margin-top: 45px;"><em class="fa fa-cloud-upload fa-2x"></em></p>
+            <span id="dragtext"></span>
+            <a href="#" class="form-file">
+                <span id="choose"></span>
+                <input id="upload-select" type="file" name="file[]" multiple="" target-view="/upload-file/" />
+            </a>
+        </div>
+        <div id="progressbar" class="progress progress-striped hidden">
+            <div role="progressbar" aria-valuenow="100" aria-valuemin="0" aria-valuemax="100" class="progress-bar progress-bar-info active"></div>
+        </div>
+    </div>
+    {# 添加饼状图#}
+    <div class="col-sm-3 col-lg-3 col-xs-12">
+        <div class=" panel panel-default" style="height: 188px;">
+            <div class="panel-body text-center">
+                {# data-label="85%" radial-bar-85 #}
+                <div id="file-rain" class="radial-bar radial-bar-lg"></div>
+                <p>
+                    {# total: "1.3G", used: "10.3M"#}
+                    <span>
+                                    usage: <span id="rain-usage"></span>%, used: <span id="rain-used"></span>, total: <span id="rain-total"></span>
+                    </span>
+                </p>
+            </div>
+        </div>
+    </div>
+</div>
+<div class="row">
+    <div class="col-sm-12 col-lg-12 col-xs-12">
+        <div id="filetable" class="panel panel-collapse panel-default collapse in">
+            <div id="filemanege" class="panel-heading">
+                <a href="#" data-perform="panel-collapse" data-toggle="tooltip" title="collapse panel" class="pull-right">
+                    <em class="fa fa-minus"></em>
+                </a>
+            </div>
+            <div class="panel-body">
+                <table class="table table-bordered table-striped responsive" id="example">
+                    <thead>
+                        <tr>
+                            <th style="width: 5%" class="check-all">
+                                <div data-toggle="tooltip" data-title="Check All" class="checkbox c-checkbox">
+                                    <label>
+                                        <input type="checkbox">
+                                        <span class="fa fa-check"></span>
+                                    </label>
+                                </div>
+                            </th>
+                            <th id="filename"></th>
+                            <th id="description"></th>
+                            <th id="large"></th>
+                            <th id="newtime"></th>
+                            <th id="print"></th>
+                        </tr>
+                    </thead>
+                    <tbody></tbody>
+                </table>
+            </div>
+            <div class="panel-footer">
+                <div class="row">
+                    <div class="col-lg-6 col-md-6 col-sm-12 col-xs-12">
+                        <button class="btn btn-sm btn-primary" id="Delete"></button>
+                        <button class="btn btn-sm btn-primary" id="Export"></button>
+                        <div class="col-lg-10"></div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

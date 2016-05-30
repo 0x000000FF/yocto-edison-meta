@@ -1,0 +1,62 @@
+﻿
+    <!-- START panel-->
+    <div class="panel panel-primary">
+        <div class="panel-heading" id="Refl"></div>
+        <div class="panel-body">
+            <form action="/" method="POST">
+                <div data-toggle="wizard" class="form-wizard wizard-horizontal">
+                    <!-- START wizard steps indicator-->
+                    <ol class="row">
+                        <li class="col-lg-3 col-xs-12 text-center" onclick="">
+                            <h4 id="Rea_refl"></h4>
+                            <small class="text-muted" id="Empty"></small>
+                        </li>
+                        <li class="col-lg-3 col-xs-12 text-center">
+                            <h4 id="Mob_heat"></h4>
+                            <small class="text-muted" id="Tak_out"></small>
+                        </li>
+                        <li class="col-lg-3 col-xs-12 text-center">
+                            <h4 id="Feed"></h4>
+                            <small class="text-muted" id="Insert"></small>
+                        </li>
+                        <li class="col-lg-3 col-xs-12 text-center">
+                            <h4 id="Tes_ext"></h4>
+                            <small class="text-muted" id="Obser"></small>
+                        </li>
+                    </ol>
+                <span class="progress progress-striped m0 progress-sm">
+                    <span style="width: 25%;" class="progress-bar progress-bar-primary"></span>
+                </span>
+                    <div>
+                        <fieldset>
+                            <div class="row">
+                                <h3 id="rep"></h3>
+                                <h4 id="stgh"></h4>
+                            </div>
+                        </fieldset>
+                    </div>
+                    <div>
+                        <fieldset>
+                            <button type="button" class="btn btn-default btn-lg" onclick="movemid()" id="Noz_cen"></button>
+                            <button type="button" class="btn btn-default btn-lg" onclick="movemid()" id="Noz_hea"></button>
+                        </fieldset>
+                    </div>
+                    <div>
+                        <fieldset>
+                            <h3 id="Insert"></h3>
+                        </fieldset>
+                    </div>
+                    <div>
+                        <h3 id="clik"></h3>
+                        <h4 id="tet"></h4>
+                        <button type="button" class="btn btn-default btn-lg" onclick="movemid()" id="Ext"></button>
+
+                        <div class="text-right">
+                            <button type="button" class="btn btn-success  btn-lg" onclick="" id="Comp"></button>
+                        </div>
+                    </div>
+                    <!-- END Wizard Step inputs -->
+                </div>
+            </form>
+        </div>
+    </div>
