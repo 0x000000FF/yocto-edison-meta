@@ -8,11 +8,7 @@ SRC_URI = "file://updateconfigdev.conf"
 
 LICENSE = "CLOSED"
 
-<<<<<<< HEAD:meta-intel-edison-distro/recipes-connectivity/updateconfigdev/updateconfigdev.bb
-PV = "0.1"
-=======
 PV = "0.3"
->>>>>>> c80c8cc25ee4bd6944df95846766a99b39c3de9c:meta-intel-edison-distro/recipes-connectivity/mostfun-pro/updateconfig.bb
 PR = "r1"
 
 S = "${WORKDIR}"

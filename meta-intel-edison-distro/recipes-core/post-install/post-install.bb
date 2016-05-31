@@ -7,13 +7,8 @@ SRC_URI = "file://post-install.service \
 
 SYSTEMD_SERVICE_${PN} = "post-install.service"
 
-<<<<<<< HEAD
 PV = "1.8"
 PR = "r5"
-=======
-PV = "1.7"
-PR = "r4"
->>>>>>> c80c8cc25ee4bd6944df95846766a99b39c3de9c
 
 RDEPENDS_${PN} = "systemd"
 RDEPENDS_${PN} += "bash"
