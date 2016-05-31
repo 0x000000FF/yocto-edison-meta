@@ -5,7 +5,7 @@ FILESEXTRAPATHS_prepend := "${THISDIR}/files/:"
 
 LICENSE = "CLOSED"
 
-PV = "1.18"
+PV = "1.19"
 PR = "r14"
 
 RDEPENDS_${PN} = "systemd"

@@ -48,8 +48,13 @@ IMAGE_FEATURES += "debug-tweaks"
 IMAGE_INSTALL += "mostfun-pro-panel"
 #IMAGE_INSTALL += "mostfun-panel"
 IMAGE_INSTALL += "decode"
+<<<<<<< HEAD
 IMAGE_INSTALL += "updateconfig"
 #IMAGE_INSTALL += "updateconfigdev"
+=======
+#IMAGE_INSTALL += "updateconfig"
+IMAGE_INSTALL += "updateconfigdev"
+>>>>>>> c80c8cc25ee4bd6944df95846766a99b39c3de9c
 IMAGE_INSTALL += "buzzer"
 IMAGE_INSTALL += "tft-8340"
 IMAGE_INSTALL += "mountupdate"
@@ -59,8 +64,12 @@ IMAGE_INSTALL += "mjpgstreamer"
 IMAGE_INSTALL += "mail-tool"
 #IMAGE_INSTALL += "slice"
 IMAGE_INSTALL += "usbhub"
+<<<<<<< HEAD
 IMAGE_INSTALL += "automount"
 IMAGE_INSTALL += "mostfun-models"
+=======
+#IMAGE_INSTALL += "models"
+>>>>>>> c80c8cc25ee4bd6944df95846766a99b39c3de9c
 
 #IMAGE_INSTALL += "connman"
 #IMAGE_INSTALL += "connman-client"

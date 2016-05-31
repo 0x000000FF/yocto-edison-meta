@@ -1,0 +1,14 @@
+[Unit]
+Description=service for updating
+After=usbhub.service
+StopWhenUnneeded=true
+
+[Service]
+Type=simple
+ExecStart=/etc/update.sh
+Restart=on-failure
+RestartSec=11
+StandardOutput=journal+console
+
+[Install]
+WantedBy=multi-user.target

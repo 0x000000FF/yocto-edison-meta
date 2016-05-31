@@ -137,6 +137,11 @@ create_dirs()
 {
     #mkdir /mostfun
     mkdir /update
+<<<<<<< HEAD
+=======
+    mkdir /media/sdcard
+    mkdir /media/usb
+>>>>>>> c80c8cc25ee4bd6944df95846766a99b39c3de9c
 
     mkdir /home/mostfuncp
     mkdir /home/backup
@@ -244,11 +249,21 @@ sed -i -e 's/^MountFlags=.*/MountFlags='shared'/g' /lib/systemd/system/systemd-u
 
 #update-rc.d start.sh defaults 97
 
+<<<<<<< HEAD
+=======
+#update-rc.d start.sh defaults 97
+
+>>>>>>> c80c8cc25ee4bd6944df95846766a99b39c3de9c
 echo "set hostname"
 echo "mostfun-${wlan0_addr:12:2}${wlan0_addr:15:2}" > /etc/hostname 
 
 systemctl enable udhcpd-for-ra0
 systemctl enable mjpg_streamer
+<<<<<<< HEAD
+=======
+
+systemctl start panel-install
+>>>>>>> c80c8cc25ee4bd6944df95846766a99b39c3de9c
 
 systemctl stop blink-led
 fi_echo "Post install success"
