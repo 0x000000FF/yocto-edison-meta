@@ -108,8 +108,7 @@ IMAGE_INSTALL += "wget"
 IMAGE_INSTALL += "python"
 
 IMAGE_INSTALL += "python-dbus python-smartpm python-pygobject python-argparse"
-IMAGE_INSTALL += "python-distutils python-pkgutil python-audio python-image python-imaging python-email python-netserver python-xmlrpc python-ctypes python-html python-compile python-misc python-numbers python-unittest python-pydoc python-qrcode"
-
+IMAGE_INSTALL += "python-distutils python-pkgutil python-audio python-image python-imaging python-email python-netserver python-xmlrpc python-ctypes python-html python-compile python-misc python-numbers python-unittest python-pydoc python-qrcode python-evdev"
 
 #IMAGE_INSTALL += "python-pip python-blinker python-configobj python-dominate python-flask python-flask-bootstrap python-flask-login python-flask-mail python-flask-wtf python-itsdangerous python-jinja2 python-markupsafe python-six python-werkzeug python-wtforms"
 
@@ -193,15 +192,15 @@ IMAGE_INSTALL += "mraa-doc"
 #IMAGE_INSTALL += "upm-dev"
 
 # INTEL MCU FW
-IMAGE_INSTALL += "mcu-fw-load"
-IMAGE_INSTALL += "mcu-fw-bin"
+# IMAGE_INSTALL += "mcu-fw-load"
+# IMAGE_INSTALL += "mcu-fw-bin"
 
 # nfs
 IMAGE_INSTALL += "nfs-utils"
 
 # Add oFono
-#IMAGE_INSTALL += "ofono"
+# IMAGE_INSTALL += "ofono"
 
 # Add battery level detection
-#IMAGE_INSTALL += "battery-voltage"
+# IMAGE_INSTALL += "battery-voltage"
 

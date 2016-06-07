@@ -13775,13 +13775,13 @@ index 0000000..395e051
 +                .debounce_interval = 3000,
 +        },
 +        {
-+		.code = KEY_PROG1,
-+		.gpio = 61,
-+		.active_low = 1,
-+		.desc = "SW1UI4",
-+		.type = EV_KEY,
-+		.wakeup = 0,
-+		.debounce_interval = 50,
++				.code = KEY_PROG1,
++				.gpio = 83,
++				.active_low = 1,
++				.desc = "SW1UI4",
++				.type = EV_KEY,
++				.wakeup = 0,
++				.debounce_interval = 50,
 +        },
 +};
 +

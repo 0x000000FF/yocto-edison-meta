@@ -4,9 +4,9 @@ StopWhenUnneeded=false
 
 [Service]
 Type=simple
-ExecStart=/etc/start.sh
+ExecStart=/etc/mountupdate.sh
 Restart=on-failure
-RestartSec=5
+RestartSec=10
 StandardOutput=journal+console
 
 [Install]

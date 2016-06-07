@@ -5,10 +5,12 @@ if [ ${USBPORT} -eq 4 ];
 	then
 	mkdir /media/sdcard
 	mount /dev/${DEVICE} /media/sdcard
+	/etc/autoinstall.sh /media/sdcard
 fi
 
 if [ ${USBPORT} -eq 3 ]; 
 	then
-	mkdir /media/usbstorage
-	mount /dev/${DEVICE} /media/usbstorage
+	mkdir /media/usb
+	mount /dev/${DEVICE} /media/usb
+	/etc/autoinstall.sh /media/usb
 fi

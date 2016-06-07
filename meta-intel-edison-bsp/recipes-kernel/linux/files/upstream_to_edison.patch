@@ -12068,7 +12068,7 @@ new file mode 100644
 index 0000000..7fc1a26
 --- /dev/null
 +++ b/arch/x86/platform/intel-mid/device_libs/Makefile
-@@ -0,0 +1,66 @@
+@@ -0,0 +1,67 @@
 +# IPC Devices
 +obj-y += platform_sst_audio.o
 +obj-y += platform_mrfl_regulator.o
@@ -12114,6 +12114,7 @@ index 0000000..7fc1a26
 +obj-$(subst m,y,$(CONFIG_SPI_SPIDEV)) += platform_spidev.o
 +obj-$(subst m,y,$(CONFIG_TI_ADS7955_ADC)) += platform_ads7955.o
 +# MISC Devices
++obj-$(subst m,y,$(CONFIG_KEYBOARD_GPIO)) += platform_rotary_encoder.o
 +obj-$(subst m,y,$(CONFIG_KEYBOARD_GPIO)) += platform_gpio_keys.o
 +# ADC
 +obj-$(subst m,y,$(CONFIG_MSIC_GPADC))	+= platform_msic_adc.o
@@ -13733,6 +13734,40 @@ index 0000000..0229438
 +
 +extern void __init *emc1403_platform_data(void *info) __attribute__((weak));
 +#endif
+diff --git a/arch/x86/platform/intel-mid/device_libs/platform_rotary_encoder.c b/arch/x86/platform/intel-mid/device_libs/platform_rotary_encoder.c
+new file mode 100644
+index 0000000..395e051
+--- /dev/null
++++ b/arch/x86/platform/intel-mid/device_libs/platform_rotary_encoder.c
+@@ -0,0 +1,28 @@
++#include <linux/input.h>
++#include <linux/rotary_encoder.h>
++#include <linux/platform_device.h>
++#define GPIO_ROTARY_A 80
++#define GPIO_ROTARY_B 81
++static struct rotary_encoder_platform_data my_rotary_encoder_info = {
++	.steps			= 24,
++	.axis			= EV_REL,
++	.relative_axis	= true,
++	.rollover		= true,
++	.gpio_a			= GPIO_ROTARY_A,
++	.gpio_b			= GPIO_ROTARY_B,
++	.inverted_a		= 0,
++	.inverted_b		= 0,
++	.half_period	= false,
++};
++static struct platform_device rotary_encoder_device = {
++	.name		= "rotary-encoder",
++	.id			= -1,
++	.dev		= {
++		.platform_data = &my_rotary_encoder_info,
++	}
++};
++static int __init rotary_encoder_init(void)
++{
++	return platform_device_register(&rotary_encoder_device);
++}
++late_initcall(rotary_encoder_init);
 diff --git a/arch/x86/platform/intel-mid/device_libs/platform_gpio_keys.c b/arch/x86/platform/intel-mid/device_libs/platform_gpio_keys.c
 new file mode 100644
 index 0000000..395e051
@@ -13776,13 +13811,13 @@ index 0000000..395e051
 +                .debounce_interval = 3000,
 +        },
 +        {
-+		.code = KEY_PROG1,
-+		.gpio = 61,
-+		.active_low = 1,
-+		.desc = "SW1UI4",
-+		.type = EV_KEY,
-+		.wakeup = 0,
-+		.debounce_interval = 50,
++				.code = KEY_ENTER,
++				.gpio = 83,
++				.active_low = 1,
++				.desc = "main_btn",
++				.type = EV_KEY,
++				.wakeup = 0,
++				.debounce_interval = 5000,
 +        },
 +};
 +

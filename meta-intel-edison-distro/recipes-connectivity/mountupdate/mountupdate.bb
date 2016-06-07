@@ -14,16 +14,16 @@ PV = "0.1"
 PR = "r0"
 
 SYSTEMD_SERVICE_${PN} = "mountupdate.service"
-SYSTEMD_AUTO_ENABLE = "disable"
+SYSTEMD_AUTO_ENABLE = "enable"
 
 S = "${WORKDIR}"
 
-inherit allarch update-alternatives
+inherit systemd update-alternatives
 
 FILESDIR = "${FILE_DIRNAME}/files/"
 
 FILES_${PN}  += " \
- /etc/init.d/mountupdate.sh\
+ /etc/mountupdate.sh\
 "
 
 do_install() {

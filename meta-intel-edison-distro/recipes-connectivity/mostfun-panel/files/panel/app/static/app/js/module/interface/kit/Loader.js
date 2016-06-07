@@ -1,1 +1,0 @@
-define(["require","exports","module"],function(e,t){"use strict";function n(){var e=document.createElement("div");return $(e).addClass("loader"),e}t.getDiv=n});

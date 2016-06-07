@@ -4,6 +4,7 @@ SECTION = "userland"
 FILESEXTRAPATHS_prepend := "${THISDIR}/files/:"
 
 RDEPENDS_${PN} = "python"
+RDEPENDS_${PN} = "python-evdev"
 RDEPENDS_${PN} += "mraa"
 RDEPENDS_${PN} += "bash"
 RDEPENDS_${PN} += "buzzer"
@@ -19,8 +20,8 @@ SRC_URI = "file://mostfun.des3 \
 
 LICENSE = "CLOSED"
 
-PV = "1.29.a2108a5"
-PR = "r37"
+PV = "1.31.ffb37ea"
+PR = "r39"
 
 SYSTEMD_SERVICE_${PN} = "panel-install.service"
 SYSTEMD_SERVICE_${PN} += "mostfun_panel.service"

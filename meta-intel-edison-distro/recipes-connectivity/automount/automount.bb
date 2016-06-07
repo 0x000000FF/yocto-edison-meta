@@ -6,12 +6,13 @@ FILESEXTRAPATHS_prepend := "${THISDIR}/files/:"
 RDEPENDS_${PN} += "bash"
 
 SRC_URI = "file://100-usbstorage.rules \
+			file://autoinstall.sh \
 			file://automount.sh \
 			file://autoumount.sh"
 
 LICENSE = "CLOSED"
 
-PV = "0.1"
+PV = "0.2"
 PR = "r1"
 
 S = "${WORKDIR}"
@@ -24,6 +25,7 @@ FILES_${PN}  += " \
  /lib/udev/rules.d/100-usbstorage.rules \
  /etc/automount.sh \
  /etc/autoumount.sh \
+ /etc/autoinstall.sh \
 "
 
 do_install() {
@@ -31,6 +33,7 @@ do_install() {
 	install -v -d  ${D}/lib/udev/rules.d/
     install -m 0755 automount.sh ${D}/etc/
     install -m 0755 autoumount.sh ${D}/etc/
+    install -m 0755 autoinstall.sh ${D}/etc/
     install -m 0755 100-usbstorage.rules ${D}/lib/udev/rules.d/
 }
 

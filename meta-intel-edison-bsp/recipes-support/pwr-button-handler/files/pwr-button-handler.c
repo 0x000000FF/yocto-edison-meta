@@ -42,6 +42,7 @@
 #define EV_KEY          0x01
 /* Edison Arduino board PWR button code */
 #define KEY_POWER       116
+//#define KEY_POWER       83
 
 /* We use 2 seconds for now */
 #define EDISON_OOBE_PRESS_TIMEOUT 2

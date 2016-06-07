@@ -5,11 +5,6 @@ SRCREV_machine = "c03195ed6e3066494e3fb4be69154a57066e845b"
 SRCREV_meta = "6ad20f049abd52b515a8e0a4664861cfd331f684"
 
 SRC_URI += "file://defconfig"
-SRC_URI += "file://0001-applied-upstream_to_edison.patch"
-SRC_URI += "file://0002-applied-patch-from-DOOM-on-Edison-with-adafruit2.8-T.patch"
-SRC_URI += "file://0003-applied-patch-from-DMA-SPI-8-bit-write-working-in-3..patch"
-SRC_URI += "file://0004-added-patched-ft6x06-from-DOOM-on-Edison-with-adafru.patch"
-SRC_URI += "file://0005-added-fbtft.patch"
-SRC_URI += "file://0006-patched-fbtft-from-DOOM-on-Edison-with-adafruit2.8-T.patch"
+SRC_URI += "file://upstream_to_edison.patch"
 
 PV = "${LINUX_VERSION}"
