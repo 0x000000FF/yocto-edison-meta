@@ -1,39 +1,37 @@
-
-DESCRIPTION = "mt7601 wifi chip driver"
-SECTION = "kernel/userland"
-
-FILESEXTRAPATHS_prepend := "${THISDIR}/files/:"
-
-SRC_URI = " \
-		file://mt7601Uap.ko \
-		file://rtnet7601Uap.ko \
-		file://rtutil7601Uap.ko \
-		file://RT2870AP.dat \
-		"
-
+DESCRIPTION = "mt7601u Kernel Driver Sample"
+HOMEPAGE = "https://github.com/notro/wireless.git"
+SECTION = "kernel/modules"
+PRIORITY = "optional"
 LICENSE = "CLOSED"
+RDEPENDS_fbtft = "kernel (${KERNEL_VERSION})"
+DEPENDS = "virtual/kernel"
+PR = "r0"
 
-PV = "0.1"
-PR = "r1"
+SRCREV = "${AUTOREV}"
+SRC_URI = "git://github.com/0x000000FF/MT7601u.git;protocol=git"
 
-S = "${WORKDIR}"
+S="${WORKDIR}/git/"
 
-FILESDIR = "${FILE_DIRNAME}/files/"
+FILES_${PN}  += "/etc/Wireless/RT2870AP/RT2870AP.dat"
 
-FILES_${PN}  += " \
- /lib/modules/mt7601Uap.ko \
- /lib/modules/rtnet7601Uap.ko \
- /lib/modules/rtutil7601Uap.ko \
- /etc/Wireless/RT2870AP/RT2870AP.dat \
-"
+inherit module
 
-do_install() {
-        install -v -d  ${D}/lib/modules
-        install -v -d  ${D}/etc/Wireless/RT2870AP
-		install -m 0755 mt7601Uap.ko ${D}/lib/modules/
-		install -m 0755 rtnet7601Uap.ko ${D}/lib/modules/
-		install -m 0755 rtutil7601Uap.ko ${D}/lib/modules/
-		install -m 0755 RT2870AP.dat ${D}/etc/Wireless/RT2870AP/
+do_compile() {
+  unset CFLAGS CPPFLAGS CXXFLAGS LDFLAGS CC LD CPP
+  oe_runmake 'MODPATH="${D}${base_libdir}/modules/${KERNEL_VERSION}/kernel/drivers/net/wireless" ' \
+             'KDIR="${STAGING_KERNEL_DIR}"' \
+             'KERNEL_VERSION="${KERNEL_VERSION}"' \
+             'CC="${KERNEL_CC}"' \
+             'LD="${KERNEL_LD}"'
 }
 
+do_install() {
+   install -d ${D}${base_libdir}/modules/${KERNEL_VERSION}/kernel/drivers/net/wireless
+   install -v -d  ${D}/etc/Wireless/RT2870AP
 
+   install -m 0644 ${S}/src/os/linux/*${KERNEL_OBJECT_SUFFIX} ${D}${base_libdir}/modules/${KERNEL_VERSION}/kernel/drivers/net/wireless
+   install -m 0755 ${S}/etc/Wireless/RT2870AP/RT2870AP.dat ${D}/etc/Wireless/RT2870AP/
+}
+
+SRC_URI[md5sum] = "082723afbbe117b29c271813a525b74f"
+SRC_URI[sha256sum] = "342a1e12f39b038962b5ea0371df6b94604c9385130a07db4686ebc8ea478624"
