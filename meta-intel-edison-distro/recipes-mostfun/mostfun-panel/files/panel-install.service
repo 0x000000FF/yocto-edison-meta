@@ -1,0 +1,12 @@
+[Unit]
+Description=panel install service
+After=post-install.service
+
+[Service]
+Type=oneshot
+ExecStart=/etc/panel-install.sh
+ExecStartPost=/bin/systemctl disable panel-install.service
+StandardOutput=journal+console
+
+[Install]
+WantedBy=basic.target

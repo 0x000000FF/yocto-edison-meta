@@ -61,6 +61,8 @@ IMAGE_INSTALL += "mail-tool"
 IMAGE_INSTALL += "usbhub"
 IMAGE_INSTALL += "automount"
 IMAGE_INSTALL += "mostfun-models"
+IMAGE_INSTALL += "opencv-dev"
+IMAGE_INSTALL += "opencv-apps"
 #IMAGE_INSTALL += "models"
 
 #IMAGE_INSTALL += "connman"

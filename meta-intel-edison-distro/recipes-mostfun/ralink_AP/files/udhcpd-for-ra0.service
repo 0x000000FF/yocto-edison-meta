@@ -1,0 +1,16 @@
+[Unit]
+Description=udhcpd for ralink_AP
+Requires=sys-subsystem-net-devices-ra0.device
+After=sys-subsystem-net-devices-ra0.device
+StopWhenUnneeded=false
+
+[Service]
+Type=simple
+ExecStartPre=/sbin/ifconfig ra0 192.168.42.1 up
+ExecStart=/usr/sbin/udhcpd -f -S /etc/Wireless/RT2870AP/udhcpd-for-ra0.conf
+ExecStop=/etc/unloadra0.sh
+Restart=on-failure
+RestartSec=10
+
+[Install]
+WantedBy=multi-user.target

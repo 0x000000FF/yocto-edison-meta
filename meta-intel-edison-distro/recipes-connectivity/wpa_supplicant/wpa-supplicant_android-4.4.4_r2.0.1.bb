@@ -10,7 +10,7 @@ SYSTEMD_SERVICE_${PN} = "wpa_supplicant.service wpa_supplicant_wlan0_event.servi
 FILESEXTRAPATHS_prepend := "${THISDIR}/wpa-supplicant:"
 
 PV = "android-4.4.4_r2.0.1"
-
+SRCREV = "${AUTOREV}"
 SRC_URI = "file://defconfig \
            file://wpa_supplicant.conf-sane \
            file://99_wpa_supplicant \
@@ -18,10 +18,9 @@ SRC_URI = "file://defconfig \
            file://wpa_supplicant.service \
            file://wpa_supplicant_wlan0_event.service \
            file://wpa-supplicant.sh \
-           file://wpa-supplicant-${PV}.patch \
            file://wpa_cli-actions.sh \
-           file://wpa_supplicant_8-f62167e88c0c1b9621f2984f1a59ae7d41cf4c88.tar.gz"
-#           git://android.googlesource.com/platform/external/wpa_supplicant_8;protocol=https;tag=android-4.4.4_r2.0.1"
+           git://github.com/0x000000FF/wpa_supplicant_for_edison.git;protocol=git"
+
 
 S = "${WORKDIR}/git"
 PR = "r1"

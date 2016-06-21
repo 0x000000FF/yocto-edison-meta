@@ -1,0 +1,13 @@
+[Unit]
+Description=marlin install service
+After=post-install.service
+StopWhenUnneeded=false
+
+[Service]
+Type=oneshot
+ExecStart=/etc/marlin-install.sh
+ExecStartPost=/bin/systemctl disable marlin-install.service
+StandardOutput=journal+console
+
+[Install]
+WantedBy=basic.target
