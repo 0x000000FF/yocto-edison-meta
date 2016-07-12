@@ -12,7 +12,7 @@ SRC_URI = "file://100-usbstorage.rules \
 
 LICENSE = "CLOSED"
 
-PV = "0.3"
+PV = "0.4"
 PR = "r1"
 
 S = "${WORKDIR}"

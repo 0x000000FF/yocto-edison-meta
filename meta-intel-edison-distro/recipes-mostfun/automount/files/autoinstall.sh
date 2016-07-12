@@ -1,5 +1,4 @@
 #!/bin/bash
-
 checkfile()
 {
 	cd ${1}

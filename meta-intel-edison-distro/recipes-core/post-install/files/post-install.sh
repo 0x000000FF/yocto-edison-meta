@@ -106,11 +106,11 @@ setup_ap_ssid_and_passphrase () {
     then
         ifconfig wlan0 up
         wlan0_addr=$(cat /sys/class/net/wlan0/address | tr '[:lower:]' '[:upper:]')
-        ssid="mostfun-${wlan0_addr:12:2}${wlan0_addr:15:2}"
-
+        ssid=$(echo "mostfun-${wlan0_addr:12:2}${wlan0_addr:15:2}" | tr '[:upper:]' '[:lower:]')
         # Substitute the SSID
         #sed -i -e 's/^ssid=.*/ssid='${ssid}'/g' /etc/hostapd/hostapd.conf
         sed -i -e 's/^SSID=.*/SSID='${ssid}'/g' /etc/Wireless/RT2870AP/RT2870AP.dat
+        echo "${ssid}" > /etc/hostname 
     fi
 
     if [ -f /factory/serial_number ] ;
@@ -242,9 +242,6 @@ rm -f /lib/udev/rules.d/80-net-setup-link.rules
 sed -i -e 's/^MountFlags=.*/MountFlags='shared'/g' /lib/systemd/system/systemd-udevd.service
 
 #update-rc.d start.sh defaults 97
-
-echo "set hostname"
-echo "mostfun-${wlan0_addr:12:2}${wlan0_addr:15:2}" > /etc/hostname 
 
 systemctl enable udhcpd-for-ra0
 systemctl enable mjpg_streamer
