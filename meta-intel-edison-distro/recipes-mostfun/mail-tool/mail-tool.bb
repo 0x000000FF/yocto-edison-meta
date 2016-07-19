@@ -8,8 +8,8 @@ SRC_URI = "file://mail-tool.tar.gz"
 
 LICENSE = "CLOSED"
 
-PV = "0.1"
-PR = "r1"
+PV = "0.2"
+PR = "r2"
 
 S = "${WORKDIR}"
 

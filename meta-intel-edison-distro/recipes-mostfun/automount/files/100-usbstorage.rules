@@ -1,3 +1,3 @@
-ACTION=="add",SUBSYSTEM=="block",KERNEL=="sd[a-z]*",PROGRAM="/etc/automount.sh %p %k"
-ACTION=="remove",SUBSYSTEM=="block",KERNEL=="sd[a-z]*",PROGRAM="/etc/autoumount.sh %p %k"
-ACTION=="change",SUBSYSTEM=="block",KERNEL=="sd[a-z]*",PROGRAM="/etc/autoumount.sh %p %k"
+ACTION=="add",SUBSYSTEM=="block",KERNEL=="sd[a-z]*" ,RUN+="/etc/automount.sh %p %k"
+ACTION=="remove",SUBSYSTEM=="block",KERNEL=="sd[a-z]*" ,RUN+="/etc/autoumount.sh %p %k"
+ACTION=="change",SUBSYSTEM=="block",KERNEL=="sd[a-z]",ENV{DISK_MEDIA_CHANGE}=="1" ,RUN+="/etc/autoumount.sh %p %k"

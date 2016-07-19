@@ -106,11 +106,11 @@ setup_ap_ssid_and_passphrase () {
     then
         ifconfig wlan0 up
         wlan0_addr=$(cat /sys/class/net/wlan0/address | tr '[:lower:]' '[:upper:]')
-        ssid="mostfun-${wlan0_addr:12:2}${wlan0_addr:15:2}"
-
+        ssid=$(echo "mostfun-${wlan0_addr:12:2}${wlan0_addr:15:2}" | tr '[:upper:]' '[:lower:]')
         # Substitute the SSID
         #sed -i -e 's/^ssid=.*/ssid='${ssid}'/g' /etc/hostapd/hostapd.conf
         sed -i -e 's/^SSID=.*/SSID='${ssid}'/g' /etc/Wireless/RT2870AP/RT2870AP.dat
+        echo "${ssid}" > /etc/hostname 
     fi
 
     if [ -f /factory/serial_number ] ;
@@ -119,7 +119,7 @@ setup_ap_ssid_and_passphrase () {
         passphrase="${factory_serial}"
 
         # Substitute the passphrase
-        sed -i -e 's/^wpa_passphrase=.*/wpa_passphrase='12345678'/g' /etc/hostapd/hostapd.conf
+        # sed -i -e 's/^wpa_passphrase=.*/wpa_passphrase='12345678'/g' /etc/hostapd/hostapd.conf
     fi
 
     sync
@@ -154,6 +154,7 @@ restore()
     cp /home/backup/RT2870AP.dat /etc/Wireless/RT2870AP/
     cp /home/backup/wpa_supplicant.conf /etc/wpa_supplicant/
     systemctl enable wpa_supplicant
+    systemctl start wpa_supplicant
 }
 # script main part
 
@@ -230,9 +231,6 @@ set_rootpassword
 echo "create dirs"
 create_dirs
 
-echo "reatore"
-restore
-
 # Setup Access Point SSID and passphrase
 setup_ap_ssid_and_passphrase
 fi_assert $? "Generating Wifi Access Point SSID and passphrase"
@@ -243,11 +241,11 @@ sed -i -e 's/^MountFlags=.*/MountFlags='shared'/g' /lib/systemd/system/systemd-u
 
 #update-rc.d start.sh defaults 97
 
-echo "set hostname"
-echo "mostfun-${wlan0_addr:12:2}${wlan0_addr:15:2}" > /etc/hostname 
-
 systemctl enable udhcpd-for-ra0
 systemctl enable mjpg_streamer
+
+echo "reatore"
+restore
 
 systemctl stop blink-led
 fi_echo "Post install success"

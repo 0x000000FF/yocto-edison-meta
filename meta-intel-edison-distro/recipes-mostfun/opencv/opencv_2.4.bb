@@ -11,7 +11,7 @@ DEPENDS = "python-numpy libtool swig swig-native python bzip2 zlib glib-2.0"
 
 ## df8e28283f09825cca0c2902160b7abebcfe1b64
 ## git://github.com/Itseez/opencv.git;branch=2.4
-SRC_URI = "file://opencv2.4.tar.gz \
+SRC_URI = "file://opencv-2.4.9+gitAUTOINC+df8e28283f-r0-patched.tar.gz \
 "
 #file://opencv-fix-pkgconfig-generation.patch
 
@@ -94,8 +94,5 @@ do_install_append() {
     sed -i '/blobtrack/d' ${D}${includedir}/opencv/cvaux.h
 
     # Move Python files into correct library folder (for multilib build)
-    if [ "$libdir" != "/usr/lib" ]; then
-        mv ${D}/usr/lib/* ${D}/${libdir}/
-        rm -rf ${D}/usr/lib
-    fi
+
 }
