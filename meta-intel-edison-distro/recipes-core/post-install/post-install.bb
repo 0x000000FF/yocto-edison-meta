@@ -7,7 +7,11 @@ SRC_URI = "file://post-install.service \
 
 SYSTEMD_SERVICE_${PN} = "post-install.service"
 
+<<<<<<< HEAD
 PV = "1.10"
+=======
+PV = "1.9"
+>>>>>>> 5a4b8b1f33e303fe8af48e271206a87db760c5a1
 PR = "r5"
 
 RDEPENDS_${PN} = "systemd"

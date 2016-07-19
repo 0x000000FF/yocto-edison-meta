@@ -11,18 +11,18 @@ SRC_URI = "file://cnfeeds \
             file://eufeeds \
             file://myfeeds \
 			file://checkupdate.sh \
-			file://checkpackages.sh \
+			file://doupgrade.sh \
 			file://checkupdate.service \
-			file://checkpackages.service \
+			file://doupgrade.service \
 			"
 
 LICENSE = "CLOSED"
 
-PV = "0.6"
-PR = "r4"
+PV = "0.10"
+PR = "r5"
 
 SYSTEMD_SERVICE_${PN} = "checkupdate.service"
-SYSTEMD_SERVICE_${PN} += "checkpackages.service"
+SYSTEMD_SERVICE_${PN} += "doupgrade.service"
 SYSTEMD_AUTO_ENABLE = "disable"
 
 S = "${WORKDIR}"
@@ -38,7 +38,7 @@ FILES_${PN}  += " \
  /etc/opkg/eufeeds \
  /etc/opkg/myfeeds \
  /etc/checkupdate.sh \
- /etc/checkpackages.sh \
+ /etc/doupgrade.sh \
 "
 
 do_install() {
@@ -49,10 +49,10 @@ do_install() {
     install -m 0755 eufeeds ${D}/etc/opkg/
     install -m 0755 myfeeds ${D}/etc/opkg/
     install -m 0755 checkupdate.sh ${D}/etc/
-    install -m 0755 checkpackages.sh ${D}/etc/
+    install -m 0755 doupgrade.sh ${D}/etc/
     if ${@base_contains('DISTRO_FEATURES','systemd','true','false',d)}; then
         install -d ${D}/${systemd_unitdir}/system
         install -m 644 ${WORKDIR}/checkupdate.service ${D}${systemd_unitdir}/system/
-        install -m 644 ${WORKDIR}/checkpackages.service ${D}${systemd_unitdir}/system/
+        install -m 644 ${WORKDIR}/doupgrade.service ${D}${systemd_unitdir}/system/
     fi
 }

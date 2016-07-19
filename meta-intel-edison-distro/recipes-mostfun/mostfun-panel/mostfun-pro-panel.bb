@@ -20,7 +20,11 @@ SRC_URI = "file://mostfun.des3 \
 
 LICENSE = "CLOSED"
 
+<<<<<<< HEAD
 PV = "1.46.a8bf781"
+=======
+PV = "1.43.08f7834"
+>>>>>>> 5a4b8b1f33e303fe8af48e271206a87db760c5a1
 PR = "r40"
 
 SYSTEMD_SERVICE_${PN} = "panel-install.service"
